@@ -1,0 +1,7 @@
+D:\Game\elin\ElinMOD\_bin\GaExtendDisplay\GaExtendDisplay.dll
+D:\Game\elin\ElinMOD\_bin\GaExtendDisplay\GaExtendDisplay.pdb
+D:\Game\elin\ElinMOD\GaExtendDisplay\obj\Debug\GaExtendDisplay.csproj.AssemblyReference.cache
+D:\Game\elin\ElinMOD\GaExtendDisplay\obj\Debug\GaExtendDisplay.csproj.CoreCompileInputs.cache
+D:\Game\elin\ElinMOD\GaExtendDisplay\obj\Debug\GaExtendDisplay.dll
+D:\Game\elin\ElinMOD\GaExtendDisplay\obj\Debug\GaExtendDisplay.pdb
+D:\Game\elin\ElinMOD\_bin\GaExtendDisplay\package.xml
