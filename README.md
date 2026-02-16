@@ -1,0 +1,49 @@
+
+    Provisional patch of GanExtendDisplay for Elin nightly compatibility.
+    Fixes DNA.WriteNote errors and gene tooltip display issues.
+	Mod provided as-is, with no maintenance or support whatsoever.
+		
+    This was uploaded with permission from the original mod author, Gan@伪物 
+	Source for the original mod (https://github.com/qaz13e/GanExtendDisplay)
+	Workshop link to the original mod (https://steamcommunity.com/sharedfiles/filedetails/?id=3358329014)
+	Source for this patched mod (https://github.com/monkzer0/GanExtendDisplayNightly/)
+
+	Summary of changes:
+	EnchantDisplayClass.cs
+	DNA.WriteNote signature updated — Added a Chara tg parameter to DNA_WriteNote_Prefix, matching an upstream API change where DNA.CanRemove() now requires a Chara argument.
+
+	DNA.CanRemove() call fixed — Changed __instance.CanRemove() to __instance.CanRemove(tg) to pass the target character, fixing a compilation error from the updated game API.
+
+	Gene value display logic updated — In the gene element loop:
+
+	Added a bool flag that tracks whether the element falls into the default switch case (i.e., it's not a "slot", "feat", or "ability").
+	The numeric value (element.Value) is now only shown for default-category elements (when flag is true), rather than being shown for all elements. This avoids displaying redundant values on special categories.
+	MainExtendDisplay.cs
+	Harmony patch signature updated — The DNA_WriteNote_Prefix patch method was updated to accept and forward the new Chara tg parameter, keeping the Harmony prefix patch in sync with the actual game method signature.
+	package.xml
+	Version bump — 0.23.108.9 → 0.23.267.1, reflecting the new Elin game version this mod targets.
+	The patch fixes build errors caused by an upstream Elin API change (CanRemove now takes a Chara parameter) and refines gene display to only show numeric values for standard element categories.
+
+	由Claude翻译。
+	GanExtendDisplay 的临时补丁，用于兼容 Elin nightly 版本。
+	修复了 DNA.WriteNote 错误和基因提示显示问题。
+	模组按原样提供，不提供任何维护或支持。
+
+	本模组经原作者 Gan@伪物 许可后上传。
+	原始模组源码 (https://github.com/qaz13e/GanExtendDisplay)
+	原始模组创意工坊链接 (https://steamcommunity.com/sharedfiles/filedetails/?id=3358329014)
+	补丁模组源码 (https://github.com/monkzer0/GanExtendDisplayNightly/)
+	更改摘要：
+	EnchantDisplayClass.cs
+	更新了 DNA.WriteNote 签名 — 在 DNA_WriteNote_Prefix 中添加了 Chara tg 参数，以匹配上游 API 的变更（DNA.CanRemove() 现在需要一个 Chara 参数）。
+	修复了 DNA.CanRemove() 调用 — 将 __instance.CanRemove() 改为 __instance.CanRemove(tg)，传入目标角色，修复了因游戏 API 更新导致的编译错误。
+	更新了基因数值显示逻辑 — 在基因元素循环中：
+	添加了一个 bool 标志，用于追踪元素是否属于 switch 的默认分支（即不是"slot"、"feat"或"ability"）。
+	数值（element.Value）现在仅对默认类别的元素（当标志为 true 时）显示，而不是对所有元素显示。这避免了在特殊类别上显示冗余数值。
+	MainExtendDisplay.cs
+	更新了 Harmony 补丁签名 — DNA_WriteNote_Prefix 补丁方法已更新，以接受并转发新的 Chara tg 参数，使 Harmony 前缀补丁与实际游戏方法签名保持同步。
+	package.xml
+	版本号更新 — 0.23.108.9 → 0.23.267.1，对应本模组所适配的新 Elin 游戏版本。
+	此补丁修复了因上游 Elin API 变更（CanRemove 现在需要 Chara 参数）导致的构建错误，并优化了基因显示，使数值仅在标准元素类别中显示。
+
+</Meta>
