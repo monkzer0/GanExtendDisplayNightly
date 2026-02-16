@@ -6,11 +6,14 @@
 	<description>
     Provisional patch of GanExtendDisplay for Elin nightly compatibility.
     Fixes DNA.WriteNote errors and gene tooltip display issues.
-    Original mod by Gan@伪物 (https://github.com/qaz13e/GanExtendDisplay)
+    Original mod by Gan@伪物 
+	Source (https://github.com/qaz13e/GanExtendDisplay)
+	Workshop (https://steamcommunity.com/sharedfiles/filedetails/?id=3358329014)
 
     Show more information, display roles, display enchantments of items
     显示更多信息,角色显示，道具附魔显示
     より多くの情報を表示, キャラクター表示, 道具の附魔表示
   </description>
 	<version>0.23.267.2</version>
+
 </Meta>
