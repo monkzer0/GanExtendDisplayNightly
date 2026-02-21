@@ -123,8 +123,15 @@ namespace GanExtendDisplay
 				int num = 0;
 				foreach (BaseStats item3 in enumerable) {
 					string text4 = item3.GetPhaseStr();
-					if (text4.IsEmpty() || text4 == "#") {
+					if (text4.IsEmpty()) {
 						continue;
+					}
+					if (text4 == "#") {
+						// Area debuffs (e.g. 鈍足の魔法 -60) have no phase text; fall back to source name
+						text4 = item3.source.GetName();
+						if (text4.IsEmpty()) {
+							continue;
+						}
 					}
 
 					Color c = Color.white;
@@ -173,6 +180,15 @@ namespace GanExtendDisplay
 				}
 
 				text3 = text3.TrimEnd(" ".ToCharArray());
+
+				// Show feat elements (e.g. Miko feats)
+				var feats = __instance.elements.ListElements(x => x.source.category == "feat" && x.Value > 0);
+				if (feats != null) {
+					foreach (Element feat in feats) {
+						text3 = text3 + (" " + feat.Name + ",").TagColor(EClass.Colors.colorBuff).TagSize(CharaSettings.CharaDisplayLineActSettings.Size);
+					}
+					text3 = text3.TrimEnd(",".ToCharArray());
+				}
 			}
 
 			return text + text2 + text3;
