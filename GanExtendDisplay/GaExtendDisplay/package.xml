@@ -5,15 +5,29 @@
 	<loadPriority>100</loadPriority>
 	<description>
     Provisional patch of GanExtendDisplay for Elin nightly compatibility.
-    Fixes DNA.WriteNote errors and gene tooltip display issues.
+    Fixes DNA.WriteNote errors, gene tooltip display issues, missing Miko feat
+    display, and missing area debuff display (e.g. 鈍足の魔法 -60).
 	Mod provided as-is, with no maintenance or support whatsoever.
-		
-    This was uploaded with permission from the original mod author, Gan@伪物 
+
+    This was uploaded with permission from the original mod author, Gan@伪物
 	Source for the original mod (https://github.com/qaz13e/GanExtendDisplay)
 	Workshop link to the original mod (https://steamcommunity.com/sharedfiles/filedetails/?id=3358329014)
 	Source for this patched mod (https://github.com/monkzer0/GanExtendDisplayNightly/)
 
 	Summary of changes:
+	CharaDisplayClass.cs (new in 0.23.267.3)
+	Area debuff display fixed — Conditions whose GetPhaseStr() returns "#" (Elin's
+	sentinel for numeric-only conditions such as 鈍足の魔法 -60) were previously
+	skipped entirely. The hover text now falls back to item.source.GetName() so
+	the condition name is shown alongside its value, e.g. "鈍足の魔法(-60)".
+
+	Miko feats display added — The acts display loop only iterated
+	ability.list.items (spells/actions). A new loop appends every element with
+	source.category == "feat" and Value > 0 from the character's element
+	container, covering Miko-specific feats and feats from all other jobs.
+	Feat names are coloured with EClass.Colors.colorBuff and sized with the
+	configured act font size. Gated by CharaDisplayLineActSettings as usual.
+
 	EnchantDisplayClass.cs
 	DNA.WriteNote signature updated — Added a Chara tg parameter to DNA_WriteNote_Prefix, matching an upstream API change where DNA.CanRemove() now requires a Chara argument.
 
@@ -26,12 +40,13 @@
 	MainExtendDisplay.cs
 	Harmony patch signature updated — The DNA_WriteNote_Prefix patch method was updated to accept and forward the new Chara tg parameter, keeping the Harmony prefix patch in sync with the actual game method signature.
 	package.xml
-	Version bump — 0.23.108.9 → 0.23.267.1, reflecting the new Elin game version this mod targets.
+	Version bump — 0.23.267.2 → 0.23.267.3, adding the Miko feats and area debuff fixes.
+	Previous bump — 0.23.108.9 → 0.23.267.1, reflecting the Elin game version this mod targets.
 	The patch fixes build errors caused by an upstream Elin API change (CanRemove now takes a Chara parameter) and refines gene display to only show numeric values for standard element categories.
 
 	由Claude翻译。
 	GanExtendDisplay 的临时补丁，用于兼容 Elin nightly 版本。
-	修复了 DNA.WriteNote 错误和基因提示显示问题。
+	修复了 DNA.WriteNote 错误、基因提示显示问题、巫女（Miko）专长信息缺失以及区域减益（如鈍足の魔法 -60）信息缺失的问题。
 	模组按原样提供，不提供任何维护或支持。
 
 	本模组经原作者 Gan@伪物 许可后上传。
@@ -39,6 +54,12 @@
 	原始模组创意工坊链接 (https://steamcommunity.com/sharedfiles/filedetails/?id=3358329014)
 	补丁模组源码 (https://github.com/monkzer0/GanExtendDisplayNightly/)
 	更改摘要：
+	CharaDisplayClass.cs（0.23.267.3 新增）
+	修复区域减益显示 — GetPhaseStr() 返回"#"的状态（Elin 中仅有数值的状态，如鈍足の魔法 -60）之前会被完全跳过。
+	现在改为使用 item.source.GetName() 作为回退，在悬停文本中显示状态名称及其数值，例如"鈍足の魔法(-60)"。
+	新增巫女（Miko）专长显示 — 原有的行动（acts）显示循环仅遍历 ability.list.items（法术/行动），未包含专长（feat）元素。
+	新增循环遍历角色元素容器中 source.category == "feat" 且 Value > 0 的所有元素，涵盖巫女及其他职业的专长。
+	专长名称以 EClass.Colors.colorBuff 着色，字体大小与行动显示设置保持一致，并受 CharaDisplayLineActSettings 控制。
 	EnchantDisplayClass.cs
 	更新了 DNA.WriteNote 签名 — 在 DNA_WriteNote_Prefix 中添加了 Chara tg 参数，以匹配上游 API 的变更（DNA.CanRemove() 现在需要一个 Chara 参数）。
 	修复了 DNA.CanRemove() 调用 — 将 __instance.CanRemove() 改为 __instance.CanRemove(tg)，传入目标角色，修复了因游戏 API 更新导致的编译错误。
@@ -48,10 +69,11 @@
 	MainExtendDisplay.cs
 	更新了 Harmony 补丁签名 — DNA_WriteNote_Prefix 补丁方法已更新，以接受并转发新的 Chara tg 参数，使 Harmony 前缀补丁与实际游戏方法签名保持同步。
 	package.xml
-	版本号更新 — 0.23.108.9 → 0.23.267.1，对应本模组所适配的新 Elin 游戏版本。
+	版本号更新 — 0.23.267.2 → 0.23.267.3，包含巫女专长及区域减益修复。
+	上次版本号更新 — 0.23.108.9 → 0.23.267.1，对应本模组所适配的新 Elin 游戏版本。
 	此补丁修复了因上游 Elin API 变更（CanRemove 现在需要 Chara 参数）导致的构建错误，并优化了基因显示，使数值仅在标准元素类别中显示。
   </description>
-	<version>0.23.267.2</version>
+	<version>0.23.267.3</version>
 
 </Meta>
 
