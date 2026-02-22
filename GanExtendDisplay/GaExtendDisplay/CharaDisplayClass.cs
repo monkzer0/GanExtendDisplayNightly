@@ -167,7 +167,12 @@ namespace GanExtendDisplay
 
 			if (CharaSettings.CharaDisplayLineActSettings.CharaDisplayLineOut && (!CharaSettings.CharaDisplayLineActSettings.CharaDisplayPCFactionOnly || __instance.IsPCFaction)) {
 				text3 += Environment.NewLine;
+				int actItemsPerLine = CharaSettings.CharaDisplayLineActItemsPerLine.Value;
+				int actCount = 0;
 				foreach (ActList.Item item4 in __instance.ability.list.items) {
+					if (actItemsPerLine > 0 && actCount > 0 && actCount % actItemsPerLine == 0) {
+						text3 += Environment.NewLine;
+					}
 					string aliasParentName = null;
 					if (!string.IsNullOrWhiteSpace(item4.act.source.aliasParent)) {
 						string aliasParentElement = Element.GetName(item4.act.source.aliasParent);
@@ -175,19 +180,29 @@ namespace GanExtendDisplay
 							aliasParentName = "(" + aliasParentElement + ")";
 						}
 					}
-					
 					text3 = text3 + (item4.act.Name + aliasParentName + ", ").TagSize(CharaSettings.CharaDisplayLineActSettings.Size);
+					actCount++;
 				}
+				text3 = text3.TrimEnd(" ".ToCharArray()).TrimEnd(",".ToCharArray());
+			}
 
-				text3 = text3.TrimEnd(" ".ToCharArray());
-
-				// Show feat elements (e.g. Miko feats)
+			// Feat line — displayed separately from acts so each can be toggled independently
+			// 特技行 — 与行动分开显示，可独立切换
+			// 特技行 — 行動とは別に表示し、独立して切り替え可能
+			if (CharaSettings.CharaDisplayLineFeatSettings.CharaDisplayLineOut && (!CharaSettings.CharaDisplayLineFeatSettings.CharaDisplayPCFactionOnly || __instance.IsPCFaction)) {
 				var feats = __instance.elements.ListElements(x => x.source.category == "feat" && x.Value > 0);
-				if (feats != null) {
+				if (feats != null && feats.Any()) {
+					text3 += Environment.NewLine;
+					int featItemsPerLine = CharaSettings.CharaDisplayLineFeatItemsPerLine.Value;
+					int featCount = 0;
 					foreach (Element feat in feats) {
-						text3 = text3 + (" " + feat.Name + ",").TagColor(EClass.Colors.colorBuff).TagSize(CharaSettings.CharaDisplayLineActSettings.Size);
+						if (featItemsPerLine > 0 && featCount > 0 && featCount % featItemsPerLine == 0) {
+							text3 += Environment.NewLine;
+						}
+						text3 = text3 + (feat.Name + ", ").TagColor(EClass.Colors.colorBuff).TagSize(CharaSettings.CharaDisplayLineFeatSettings.Size);
+						featCount++;
 					}
-					text3 = text3.TrimEnd(",".ToCharArray());
+					text3 = text3.TrimEnd(" ".ToCharArray()).TrimEnd(",".ToCharArray());
 				}
 			}
 

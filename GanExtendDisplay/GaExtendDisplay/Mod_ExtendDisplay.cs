@@ -34,6 +34,7 @@ namespace GanExtendDisplay
 			CharaSettings.CharaDisplayLineAttributesSettings = new CharaConfigClass(CharaDisplayLineAttributes.Value, CharaDisplayLineAttributesPCFactionOnly.Value, CharaDisplayLineAttributesSize.Value);
 			CharaSettings.CharaDisplayLineFavgiftSettings = new CharaConfigClass(CharaDisplayLineFavgift.Value, CharaDisplayLineFavgiftPCFactionOnly.Value, CharaDisplayLineFavgiftSize.Value);
 			CharaSettings.CharaDisplayLineActSettings = new CharaConfigClass(CharaDisplayLineAct.Value, CharaDisplayLineActPCFactionOnly.Value, CharaDisplayLineActSize.Value);
+			CharaSettings.CharaDisplayLineFeatSettings = new CharaConfigClass(CharaDisplayLineFeat.Value, CharaDisplayLineFeatPCFactionOnly.Value, CharaDisplayLineFeatSize.Value);
 			if (PluginSettings.CharaDisplay.Value != "Disable") {
 				Harmony.CreateAndPatchAll(typeof(CharaDisplay), null);
 			}
