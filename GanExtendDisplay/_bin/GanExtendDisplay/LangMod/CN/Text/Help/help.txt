@@ -1,0 +1,65 @@
+GanExtendDisplayNightly 为角色悬停文本、物品检视和附魔查看添加详细的属性、增益及特技信息。本模组是 GanExtendDisplay 的社区分支版本，专为 Elin Nightly 版本持续维护。
+
+{topic|⚠ 兼容性注意}
+请勿与原版 GanExtendDisplay 同时使用。两个模组会对相同的游戏方法打补丁，同时启用会导致显示混乱或重复。两者只能选其一。
+安装本模组前，请先取消订阅原版。
+
+$显示内容
+{topic|角色}
+将鼠标悬停在角色上可查看：
+・ 等级（颜色标注威胁等级，☠ 代表极度危险）
+・ 稀有度标识（★ ☆ ◇ △）
+・ 亲密度（♥ / ♡）
+・ 第1行：性别、年龄、种族、职业、AI行为、护甲技能、攻击方式
+・ 第2行：生命值、回避值（DV）、防御值（PV）、速度
+・ 第3行：精力值（SP）、饥饿度、工作与爱好
+・ 第4行：魔法值（MP）、负重与上限、距下一级所需经验
+・ 抗性：所有非零属性抗性
+・ 属性：八项核心属性及其数值
+・ 喜爱礼物：偏好的礼物类别与食物
+・ 状态：当前增益/减益，颜色标注（绿色＝增益，红色＝减益/疾病），显示阶段与数值——包括原版UI不显示的区域效果减益
+・ 行动：主动战斗技能
+・ 特技：被动特质与天赋（独立成行，以易于辨识的颜色显示，可与行动分开切换）
+
+{topic|地面物品}
+・ 等级、稀有度与材质
+
+{topic|背包与装备}
+・ 所有附魔词条的数值（包括基因类物品）
+
+{topic|增益/通知栏}
+・ 悬停时显示状态效果的详细信息
+
+$操作方式
+{pair|按住 Alt|显示设为 Hide 的行}
+{pair|Alt + Caps Lock|切换「始终显示隐藏行」模式开/关}
+{pair|Alt + End|切换整个模组的开关}
+{pair|Alt + Home|切换游戏自带的调试显示}
+
+$配置
+配置文件路径：
+Elin\BepInEx\config\ExtendDisplay.cfg
+
+若已安装 BepInEx 配置管理器，也可在游戏内直接修改设置。
+
+{topic|显示值说明}
+{pair|Keep|始终显示}
+{pair|Hide|默认隐藏，按住 Alt 可显示}
+{pair|Disable|禁用，永不显示}
+
+{topic|各行独立设置（角色信息行）}
+{pair|PCFactionOnly|设为 true 时仅对玩家阵营成员显示}
+{pair|Size|该行字体大小}
+{pair|Items Per Line|行动/特技专用：每达到 N 条自动换行（0 表示不限制）}
+
+所有配置说明在配置管理器中以英语、简体中文和日语同时显示。
+
+$关于本模组
+{topic|致谢}
+原版模组由 Gan@伪物 创作。
+{link|原版模组（Steam 创意工坊）|https://steamcommunity.com/sharedfiles/filedetails/?id=3358329014}
+{link|原版源码（GitHub）|https://github.com/qaz13e/GanExtendDisplay}
+{link|本分支（GitHub）|https://github.com/monkzer0/GanExtendDisplayNightly/}
+
+本模组经原作者许可后上传并维护。
+欢迎通过 Pull Request 或 Issue 参与贡献。
