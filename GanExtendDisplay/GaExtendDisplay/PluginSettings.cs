@@ -448,7 +448,7 @@ namespace GanExtendDisplay
 			CharaDisplayLineActItemsPerLine = config.Bind<int>(configDefinition, 0, configDescription);
 		}
 
-		//LineFeat
+		//LineFeat / 特技行 / 特技行
 		public static void CharaDisplayLineFeatConfig(ConfigFile config) {
 			ConfigDefinition configDefinition = new ConfigDefinition("Extend Charater Display", "Display Line Feat");
 			var acceptableValues = new AcceptableValueList<string>("Keep", "Hide", "Disable");

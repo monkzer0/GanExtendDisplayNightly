@@ -187,6 +187,8 @@ namespace GanExtendDisplay
 			}
 
 			// Feat line — displayed separately from acts so each can be toggled independently
+			// 特技行 — 与行动分开显示，可独立切换
+			// 特技行 — 行動とは別に表示し、独立して切り替え可能
 			if (CharaSettings.CharaDisplayLineFeatSettings.CharaDisplayLineOut && (!CharaSettings.CharaDisplayLineFeatSettings.CharaDisplayPCFactionOnly || __instance.IsPCFaction)) {
 				var feats = __instance.elements.ListElements(x => x.source.category == "feat" && x.Value > 0);
 				if (feats != null && feats.Any()) {
