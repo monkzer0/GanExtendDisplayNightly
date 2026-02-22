@@ -178,6 +178,12 @@ namespace GanExtendDisplay
 		public static ConfigEntry<bool> CharaDisplayLineActPCFactionOnly;
 		//public static ConfigEntry<bool> CharaDisplayLineActAliasParent;
 		public static ConfigEntry<int> CharaDisplayLineActSize;
+		public static ConfigEntry<int> CharaDisplayLineActItemsPerLine;
+
+		public static ConfigEntry<String> CharaDisplayLineFeat;
+		public static ConfigEntry<bool> CharaDisplayLineFeatPCFactionOnly;
+		public static ConfigEntry<int> CharaDisplayLineFeatSize;
+		public static ConfigEntry<int> CharaDisplayLineFeatItemsPerLine;
 
 		//line1
 		public static void CharaDisplayLine1Config(ConfigFile config) {
@@ -432,6 +438,55 @@ namespace GanExtendDisplay
 				null, Array.Empty<object>());
 			CharaDisplayLineActSize = config.Bind<int>(configDefinition, 14, configDescription);
 		}
+		public static void CharaDisplayLineActItemsPerLineConfig(ConfigFile config) {
+			ConfigDefinition configDefinition = new ConfigDefinition("Extend Charater Display", "Display Line Act Items Per Line");
+			ConfigDescription configDescription = new ConfigDescription(
+				"Act Line: Act(s). Maximum acts shown per line before wrapping to the next line. Set to 0 to disable wrapping. Default: 0.\n" +
+				"行动行：各项行动。每行显示的最大行动数量，超出后自动换行。设为0禁用换行。默认值：0。\n" +
+				"行動行：行動（複数可）。折り返す前に1行に表示する最大行動数。0に設定すると折り返しを無効化。デフォルト：0。",
+				null, Array.Empty<object>());
+			CharaDisplayLineActItemsPerLine = config.Bind<int>(configDefinition, 0, configDescription);
+		}
+
+		//LineFeat
+		public static void CharaDisplayLineFeatConfig(ConfigFile config) {
+			ConfigDefinition configDefinition = new ConfigDefinition("Extend Charater Display", "Display Line Feat");
+			var acceptableValues = new AcceptableValueList<string>("Keep", "Hide", "Disable");
+			ConfigDescription configDescription = new ConfigDescription(
+				"Feat Line: Feat(s). Displayed separately from acts. Options: \"Keep\", \"Hide\", \"Disable\".\n" +
+				"特技行：各项特技。与行动分开显示。选项：\"Keep\"（保持）、\"Hide\"（隐藏）、\"Disable\"（禁用）。\n" +
+				"特技行：特技（複数可）。行動とは別に表示されます。オプション：\"Keep\"（維持）、\"Hide\"（非表示）、\"Disable\"（無効）。",
+				acceptableValues, Array.Empty<object>());
+			CharaDisplayLineFeat = config.Bind<String>(configDefinition, "Hide", configDescription);
+		}
+		public static void CharaDisplayLineFeatPCFactionOnlyConfig(ConfigFile config) {
+			ConfigDefinition configDefinition = new ConfigDefinition("Extend Charater Display", "Display Line Feat PCFactionOnly");
+			var acceptableValues = new AcceptableValueList<bool>(true, false);
+			ConfigDescription configDescription = new ConfigDescription(
+				"Feat Line: Feat(s). Show only for PC faction members when enabled. Options: \"true\", \"false\".\n" +
+				"特技行：各项特技。启用后仅对玩家阵营成员显示。选项：\"true\"（是）、\"false\"（否）。\n" +
+				"特技行：特技（複数可）。有効時はPCの派閥メンバーのみに表示。オプション：\"true\"（はい）、\"false\"（いいえ）。",
+				acceptableValues, Array.Empty<object>());
+			CharaDisplayLineFeatPCFactionOnly = config.Bind<bool>(configDefinition, false, configDescription);
+		}
+		public static void CharaDisplayLineFeatSizeConfig(ConfigFile config) {
+			ConfigDefinition configDefinition = new ConfigDefinition("Extend Charater Display", "Display Line Feat Size");
+			ConfigDescription configDescription = new ConfigDescription(
+				"Feat Line: Feat(s). Font size. Default: 14.\n" +
+				"特技行：各项特技。字体大小。默认值：14。\n" +
+				"特技行：特技（複数可）。フォントサイズ。デフォルト：14。",
+				null, Array.Empty<object>());
+			CharaDisplayLineFeatSize = config.Bind<int>(configDefinition, 14, configDescription);
+		}
+		public static void CharaDisplayLineFeatItemsPerLineConfig(ConfigFile config) {
+			ConfigDefinition configDefinition = new ConfigDefinition("Extend Charater Display", "Display Line Feat Items Per Line");
+			ConfigDescription configDescription = new ConfigDescription(
+				"Feat Line: Feat(s). Maximum feats shown per line before wrapping to the next line. Set to 0 to disable wrapping. Default: 0.\n" +
+				"特技行：各项特技。每行显示的最大特技数量，超出后自动换行。设为0禁用换行。默认值：0。\n" +
+				"特技行：特技（複数可）。折り返す前に1行に表示する最大特技数。0に設定すると折り返しを無効化。デフォルト：0。",
+				null, Array.Empty<object>());
+			CharaDisplayLineFeatItemsPerLine = config.Bind<int>(configDefinition, 0, configDescription);
+		}
 
 
 		public static CharaConfigClass CharaDisplayLine1Settings = null;
@@ -442,6 +497,7 @@ namespace GanExtendDisplay
 		public static CharaConfigClass CharaDisplayLineAttributesSettings = null;
 		public static CharaConfigClass CharaDisplayLineFavgiftSettings = null;
 		public static CharaConfigClass CharaDisplayLineActSettings = null;
+		public static CharaConfigClass CharaDisplayLineFeatSettings = null;
 
 	}
 
@@ -485,6 +541,12 @@ namespace GanExtendDisplay
 			CharaSettings.CharaDisplayLineActConfig(config);
 			CharaSettings.CharaDisplayLineActPCFactionOnlyConfig(config);
 			CharaSettings.CharaDisplayLineActSizeConfig(config);
+			CharaSettings.CharaDisplayLineActItemsPerLineConfig(config);
+
+			CharaSettings.CharaDisplayLineFeatConfig(config);
+			CharaSettings.CharaDisplayLineFeatPCFactionOnlyConfig(config);
+			CharaSettings.CharaDisplayLineFeatSizeConfig(config);
+			CharaSettings.CharaDisplayLineFeatItemsPerLineConfig(config);
 
 
 		}
