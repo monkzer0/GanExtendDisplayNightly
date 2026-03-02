@@ -1,0 +1,65 @@
+GanExtendDisplayNightly adds detailed stat, buff, and feat tooltips to character hover text, item inspections, and enchantment views. A community fork of GanExtendDisplay, maintained for the Elin Nightly build.
+
+{topic|⚠ Compatibility}
+Do not use this mod alongside the original GanExtendDisplay. Both patch the same game methods — running them together produces garbled or duplicated output. Only one should be active at a time.
+Unsubscribe from the original before installing this one.
+
+$What It Shows
+{topic|Characters}
+Hover over any character to see:
+・ Level (color-coded threat; ☠ marks extreme danger)
+・ Rarity badge (★ ☆ ◇ △)
+・ Affinity (♥ / ♡)
+・ Line 1: Sex, age, race, job, AI behavior, armor skill, attack style
+・ Line 2: HP, DV (dodge), PV (protection), Speed
+・ Line 3: SP (stamina), hunger, works and hobbies
+・ Line 4: MP, carried weight vs. limit, EXP to next level
+・ Resistances: all non-zero elemental resistances
+・ Attributes: the eight core stats with values
+・ Favorite gift: preferred category and food item
+・ Conditions: active buffs and debuffs, color-coded green/red, with phase and numeric value — including area-effect debuffs the vanilla UI doesn't show
+・ Acts: active combat abilities
+・ Feats: passive traits and talents (own line, distinct color, toggled independently from acts)
+
+{topic|Items on the Ground}
+・ Level, rarity, and material
+
+{topic|Inventory and Equipment}
+・ Numeric values of all enchantment entries, including gene-type items
+
+{topic|Buff Bar}
+・ Status effects show extra detail on hover
+
+$Controls
+{pair|Hold Alt|Reveal lines set to Hide}
+{pair|Alt + Caps Lock|Toggle "always show hidden lines" on/off}
+{pair|Alt + End|Toggle the entire mod on/off}
+{pair|Alt + Home|Toggle the game's debug display}
+
+$Configuration
+Config file location:
+Elin\BepInEx\config\ExtendDisplay.cfg
+
+You can also edit settings live in the BepInEx config manager if you have it installed.
+
+{topic|Display values}
+{pair|Keep|Always visible}
+{pair|Hide|Hidden by default; hold Alt to reveal}
+{pair|Disable|Never shown}
+
+{topic|Per-line settings (character lines)}
+{pair|PCFactionOnly|When true, only shows for your faction members}
+{pair|Size|Font size for that line}
+{pair|Items Per Line|Acts / feats only: wrap to a new line after N entries (0 = no limit)}
+
+Config descriptions appear in English, Simplified Chinese, and Japanese in the config manager.
+
+$About
+{topic|Credits}
+Original mod by Gan@伪物.
+{link|Original mod on Steam Workshop|https://steamcommunity.com/sharedfiles/filedetails/?id=3358329014}
+{link|Original source on GitHub|https://github.com/qaz13e/GanExtendDisplay}
+{link|This fork on GitHub|https://github.com/monkzer0/GanExtendDisplayNightly/}
+
+Uploaded and maintained with permission from the original author.
+Contributions are welcome — open a pull request or issue on GitHub.
