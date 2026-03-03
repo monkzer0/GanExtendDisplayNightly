@@ -354,6 +354,8 @@ namespace GanExtendDisplay
     <slider id=""sl_lFeasz"" min=""10"" max=""30"" step=""1"" width=""20%""/>
     <slider id=""sl_lFeaipl"" min=""0"" max=""20"" step=""1"" width=""20%""/>
   </hlayout>
+
+  <vlayout height=""30""/>
 </config>";
 
 		// -------------------------------------------------------------------------
