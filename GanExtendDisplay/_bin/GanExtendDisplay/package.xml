@@ -11,6 +11,11 @@
     Show more information, display roles, display enchantments of items
     显示更多信息,角色显示，道具附魔显示
     より多くの情報を表示, キャラクター表示, 道具の附魔表示
-  </description>
+
+    Optional in-game companion mods:
+    - Mod Options (Workshop ID 3381182341, by EvilMask) — dedicated settings tab with live-update support
+    - Mod Config GUI (Workshop ID 3379819704, by xTracr) — general-purpose config editor, no integration needed
+    - Mod Help (Workshop ID 3406542368, by Drakeny) — in-game help viewer; built-in help pages included (EN/CN/JP)
+</description>
 	<version>0.23.267.2</version>
 </Meta>

@@ -57,20 +57,30 @@ The UI widget that shows status effects displays the same extra detail on hover.
 
 ---
 
-## Mod Options (optional)
+## In-game configuration (optional)
 
-If you install [Mod Options](https://steamcommunity.com/workshop/filedetails/?id=3381182341) by EvilMask, all settings for this mod appear in an in-game panel — no need to edit the config file by hand.
+Three companion mods give you in-game access to settings and help. All are optional — the mod runs fine without any of them.
 
-Mod Options is a **soft dependency**: the mod works normally without it. If it is installed, a tab labelled **Extend Display** appears in the Mod Options UI.
+### Mod Options — by EvilMask
+
+Install [Mod Options](https://steamcommunity.com/workshop/filedetails/?id=3381182341) and a tab labelled **Extend Display** appears in its panel. This mod has native integration with Mod Options — settings are grouped and labelled, with live-update support for character line settings.
 
 - Changes to character display lines (mode, font size, faction filter, items per line) take effect **immediately** without restarting.
 - Changes to the five main feature toggles (Character Display, Thing Display, etc.) take effect on the **next game restart**, because those control whether Harmony patches are applied at startup.
+
+### Mod Config GUI — by xTracr
+
+[Mod Config GUI](https://steamcommunity.com/sharedfiles/filedetails/?id=3379819704) is a general-purpose in-game config editor for BepInEx mods. This mod uses a standard `.cfg` file, so Mod Config GUI works with it automatically — no special integration needed.
+
+### Mod Help — by Drakeny
+
+[Mod Help](https://steamcommunity.com/sharedfiles/filedetails/?id=3406542368) is an in-game help viewer. This mod ships built-in help pages in English, Simplified Chinese, and Japanese — if Mod Help is installed, the full documentation is readable from within the game.
 
 ---
 
 ## Configuration
 
-The config file is at `Elin\BepInEx\config\ExtendDisplay.cfg`. If you have the BepInEx config manager or Mod Options installed, you can also edit settings in-game.
+The config file is at `Elin\BepInEx\config\ExtendDisplay.cfg`. If you have the BepInEx config manager, [Mod Options](https://steamcommunity.com/workshop/filedetails/?id=3381182341), or [Mod Config GUI](https://steamcommunity.com/sharedfiles/filedetails/?id=3379819704) installed, you can also edit settings in-game.
 
 Each display section accepts three values:
 
@@ -193,20 +203,30 @@ This fork is uploaded and maintained with permission from the original author.
 
 ---
 
-## Mod Options（可选）
+## 游戏内配置（可选）
 
-安装 EvilMask 的 [Mod Options](https://steamcommunity.com/workshop/filedetails/?id=3381182341) 后，本模组的所有设置将显示在游戏内面板中，无需手动编辑配置文件。
+以下三款配套模组可让你在游戏内访问设置和帮助文档。全部为可选项——不安装任何一款，本模组均可正常运行。
 
-Mod Options 为**软依赖**：未安装时本模组正常运行。安装后，Mod Options UI 中会出现名为 **Extend Display** 的标签页。
+### Mod Options — 作者：EvilMask
+
+安装 [Mod Options](https://steamcommunity.com/workshop/filedetails/?id=3381182341) 后，其面板中将出现名为 **Extend Display** 的标签页。本模组已与 Mod Options 原生集成——设置已分组标注，角色显示行设置支持实时更新。
 
 - 角色显示行的更改（显示模式、字体大小、阵营过滤、每行条目数）**立即生效**，无需重启游戏。
 - 五项主要功能开关（角色显示、物品显示等）的更改在**下次启动游戏**后生效，因为这些开关控制 Harmony 补丁是否在启动时加载。
+
+### Mod Config GUI — 作者：xTracr
+
+[Mod Config GUI](https://steamcommunity.com/sharedfiles/filedetails/?id=3379819704) 是一款适用于 BepInEx 模组的通用游戏内配置编辑器。由于本模组使用标准 `.cfg` 文件，Mod Config GUI 无需任何特殊集成即可自动兼容。
+
+### Mod Help — 作者：Drakeny
+
+[Mod Help](https://steamcommunity.com/sharedfiles/filedetails/?id=3406542368) 是一款游戏内帮助查看器。本模组内置了英语、简体中文和日语三种语言的帮助页面——安装 Mod Help 后，即可在游戏内直接阅读完整文档。
 
 ---
 
 ## 配置
 
-配置文件位于 `Elin\BepInEx\config\ExtendDisplay.cfg`。若已安装 BepInEx 配置管理器或 Mod Options，也可在游戏内直接编辑。
+配置文件位于 `Elin\BepInEx\config\ExtendDisplay.cfg`。若已安装 BepInEx 配置管理器、[Mod Options](https://steamcommunity.com/workshop/filedetails/?id=3381182341) 或 [Mod Config GUI](https://steamcommunity.com/sharedfiles/filedetails/?id=3379819704)，也可在游戏内直接编辑。
 
 每个显示项支持三个值：
 
@@ -256,3 +276,149 @@ Mod Options 为**软依赖**：未安装时本模组正常运行。安装后，M
 ---
 
 *针对 Elin Nightly 版本，按原样提供——游戏更新时可能失效。*
+
+---
+
+由Claude翻訳。
+
+# GanExtendDisplayNightly
+
+Elin Nightly ビルド向けに維持されている、[GanExtendDisplay](https://steamcommunity.com/sharedfiles/filedetails/?id=3358329014)（原作者：[Gan@伪物](https://github.com/qaz13e/GanExtendDisplay)）のコミュニティフォークです。
+
+---
+
+## 元のMODと同時に使用できますか？
+
+**いいえ。** 両方が同じゲームメソッドにパッチを当てます。同時に実行すると予測不能な結果が生じます — 後にロードされた方が前のものを上書きし、ツールチップの出力が乱れたり重複したりすることがあります。**このMODをインストールする前に、元のGanExtendDisplayの購読を解除してください。**
+
+---
+
+## 何ができるの？
+
+マウスをキャラクター、地面のアイテム、またはインベントリの装備にホバーすると、通常は基本情報のみが表示されます。このMODはそれらのツールチップに設定可能な詳細情報を追加します — ステータス、耐性、バフ、特技、エンチャント値 — メニューを開かずに確認できます。
+
+---
+
+## 表示内容
+
+### キャラクター
+任意のキャラクターにホバーすると、設定に応じて以下を確認できます：
+
+- **レベルと脅威表示** — 自分のレベルと比較した色分け表示；☠ は極めて危険なものを示す
+- **レアリティバッジ** — 各レアリティ段階の ★ ☆ ◇ △ シンボル
+- **好感度** — 相手があなたに対してどう感じているかを示す ♥ / ♡
+- **行1:** 性別、年齢、種族、職業、AI行動、防具スキル、攻撃スタイル
+- **行2:** HP、DV（回避）、PV（防御）、速度
+- **行3:** SP（スタミナ）、空腹度、現在の仕事と趣味
+- **行4:** MP、所持重量と上限、次のレベルまでの経験値
+- **耐性:** すべての非ゼロ属性耐性
+- **属性値:** 8つの基本ステータス（STR、CON、DEX、PER、LRN、WIL、MAG、CHR）と数値
+- **好物:** このキャラクターが好むギフトのカテゴリと食べ物
+- **状態:** アクティブなバフとデバフ、緑（バフ）または赤（デバフ/病気）でカラー表示、フェーズと数値付き — バニラUIに表示されないエリア効果デバフを含む
+- **行動:** アクティブな戦闘スキル
+- **特技:** パッシブな特性と才能、独自の行に特徴的な色で表示（行動とは別に、それぞれ独立して切り替え可能）
+
+### 地面のアイテム
+地面の任意のアイテムにホバーすると、そのレベル、レアリティ、素材を確認できます。
+
+### インベントリと装備
+装備にホバーすると、すべてのエンチャント項目の数値を確認できます。遺伝子タイプのアイテムにも対応しています。
+
+### バフ/通知バー
+ステータス効果を表示するUIウィジェットが、ホバー時に同じ追加詳細を表示します。
+
+---
+
+## 操作方法
+
+| 入力 | 効果 |
+|---|---|
+| **Alt** を押しながら | `Hide` に設定した行を表示 |
+| **Alt + Caps Lock** | 「常時非表示行を表示」をオン/オフ切り替え |
+| **Alt + End** | MOD全体のオン/オフ切り替え |
+| **Alt + Home** | ゲームのデバッグ表示を切り替え |
+
+---
+
+## ゲーム内設定（オプション）
+
+3つの補助MODでゲーム内から設定やヘルプにアクセスできます。すべてオプションです — どれもインストールしなくても本MODは正常に動作します。
+
+### Mod Options — EvilMask 作
+
+[Mod Options](https://steamcommunity.com/workshop/filedetails/?id=3381182341) をインストールすると、そのパネルに **Extend Display** タブが表示されます。このMODはMod Optionsとネイティブに統合されています — 設定はグループ化・ラベル付けされており、キャラクター行の設定はリアルタイム更新に対応しています。
+
+- キャラクター表示行への変更（モード、フォントサイズ、派閥フィルター、1行の件数）は、再起動なしで**即時反映**されます。
+- 5つの主要機能スイッチ（キャラクター表示、アイテム表示など）への変更は、**次回ゲーム起動後**に反映されます（起動時のパッチ適用を制御するため）。
+
+### Mod Config GUI — xTracr 作
+
+[Mod Config GUI](https://steamcommunity.com/sharedfiles/filedetails/?id=3379819704) は、BepInEx MOD向けの汎用ゲーム内コンフィグエディタです。このMODは標準的な `.cfg` ファイルを使用しているため、Mod Config GUI は特別な統合なしに自動的に対応します。
+
+### Mod Help — Drakeny 作
+
+[Mod Help](https://steamcommunity.com/sharedfiles/filedetails/?id=3406542368) はゲーム内ヘルプビューアです。このMODには英語・簡体字中国語・日本語の内蔵ヘルプページが付属しています — Mod Help がインストールされていれば、ゲーム内から完全なドキュメントを閲覧できます。
+
+---
+
+## 設定
+
+設定ファイルは `Elin\BepInEx\config\ExtendDisplay.cfg` にあります。BepInEx コンフィグマネージャー、[Mod Options](https://steamcommunity.com/workshop/filedetails/?id=3381182341)、または [Mod Config GUI](https://steamcommunity.com/sharedfiles/filedetails/?id=3379819704) がインストールされていれば、ゲーム内でも設定を変更できます。
+
+各表示セクションは3つの値を受け付けます：
+
+| 値 | 意味 |
+|---|---|
+| `Keep` | 常に表示 |
+| `Hide` | デフォルトは非表示；Alt を押しながらで表示可能 |
+| `Disable` | 表示しない |
+
+各キャラクターステータス行にはさらに：
+
+| 設定 | 意味 |
+|---|---|
+| **PCFactionOnly** | `true` の場合、自分の派閥のキャラクターにのみ表示 |
+| **Size** | その行のフォントサイズ |
+| **Items Per Line** *（行動・特技のみ）* | N件ごとに改行；`0` は無制限 |
+
+設定の説明は、コンフィグマネージャーで**英語・簡体字中国語・日本語**で表示されます。
+
+---
+
+## 元のMODとの違い
+
+### Nightlyとの互換性修正
+
+元のMODはElinの安定版向けに書かれています。Nightlyビルドは定期的に内部APIを変更します。このフォークはそれらの変更に対応してパッチを当てています：
+
+- **DNA.WriteNote / CanRemove** — 遺伝子検査メソッドがNightlyの更新で必須の `Chara` パラメータを追加；パッチシグネチャとコールサイトを更新
+- **遺伝子表示** — 数値は標準要素カテゴリのみ表示、スロット・特技・スキルには表示しない（冗長な出力を回避）
+- **巫女の特技が表示されない** — 巫女クラスツリーの特技（スキルリストではなく要素システムに格納）が表示されていなかった；2回目の要素スキャンで修正
+- **エリアデバフが表示されない** — フェーズテキストがないエリア効果デバフ（例：鈍足フィールド効果）が表示されなかった；ソース名にフォールバックするよう修正
+
+### このフォークで追加された新機能
+
+- **特技を独立した行に** — 特技が独立して切り替え可能になり、行動とは別に表示
+- **設定可能な行折り返し** — 特技や行動が多い場合にツールチップが全画面幅に広がっていた；*Items Per Line* を正の数に設定することで、その件数ごとに折り返し（デフォルト `0` = 無制限、元の動作と同じ）
+- **三言語設定の説明** — すべての設定項目がコンフィグマネージャーで英語・簡体字中国語・日本語で表示
+
+---
+
+## これはフォークです
+
+このプロジェクトは互換性パッチとして始まりましたが、新機能を含むフォークに成長しました。Gan@伪物は元のMODの二次開発や改変を明示的に歓迎しています — その招待はここにも適用されます。
+
+**貢献を歓迎します。** [このリポジトリ](https://github.com/monkzer0/GanExtendDisplayNightly/)でプルリクエストまたはIssueを開いてください。
+
+---
+
+## クレジット
+
+元のMODは **Gan@伪物** による作品です。
+[元のソース](https://github.com/qaz13e/GanExtendDisplay) · [元のSteam Workshopページ](https://steamcommunity.com/sharedfiles/filedetails/?id=3358329014)
+
+このフォークは元の作者の許可を得て公開・維持されています。
+
+---
+
+*Elin Nightly ビルドを対象としています。現状のまま提供 — ゲームが更新された際に動作しなくなる可能性があります。*
