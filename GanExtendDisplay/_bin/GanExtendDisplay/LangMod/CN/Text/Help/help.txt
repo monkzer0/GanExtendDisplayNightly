@@ -40,6 +40,12 @@ $配置
 配置文件路径：
 Elin\BepInEx\config\ExtendDisplay.cfg
 
+安装 Mod Options（Steam 创意工坊 ID：3381182341，作者：EvilMask）后，游戏内面板中将出现"Extend Display"标签页。Mod Options 为可选项——未安装时本模组正常运行。
+
+{topic|Mod Options 实时更新说明}
+{pair|角色信息行设置|立即生效（显示模式、字体大小、阵营过滤、每行条目数）}
+{pair|主功能开关|下次启动游戏后生效（控制补丁是否在启动时加载）}
+
 若已安装 BepInEx 配置管理器，也可在游戏内直接修改设置。
 
 {topic|显示值说明}

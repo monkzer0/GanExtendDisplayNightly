@@ -40,6 +40,12 @@ $Configuration
 Config file location:
 Elin\BepInEx\config\ExtendDisplay.cfg
 
+If you install Mod Options (Steam Workshop ID 3381182341, by EvilMask), an "Extend Display" tab appears in its in-game panel. Mod Options is optional — the mod works without it.
+
+{topic|Mod Options live-update behaviour}
+{pair|Character line settings|Take effect immediately (mode, font size, faction filter, items per line)}
+{pair|Main feature toggles|Take effect on the next game restart (controls whether patches load at startup)}
+
 You can also edit settings live in the BepInEx config manager if you have it installed.
 
 {topic|Display values}

@@ -51,6 +51,9 @@ namespace GanExtendDisplay
 				Harmony.CreateAndPatchAll(typeof(EnchantDisplay), null);
 			}
 			Main.Logger.LogInfo("Successfully applied patches for [ Gan Extend Display ] plugin.");
+			// Soft dependency — registers in-game config UI if Mod Options is installed.
+			// Safe to call unconditionally; exits immediately when Mod Options is absent.
+			ModOptionsIntegration.TryRegister(this);
 		}
 
 		public static bool ModEnable = true;

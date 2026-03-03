@@ -7,6 +7,8 @@
     Provisional patch of GanExtendDisplay for Elin nightly compatibility.
     Fixes DNA.WriteNote errors, gene tooltip display issues, missing Miko feat
     display, and missing area debuff display (e.g. 鈍足の魔法 -60).
+    Supports Mod Options (Workshop ID 3381182341) as a soft dependency —
+    an in-game settings tab appears when Mod Options is installed.
 	Mod provided as-is, with no maintenance or support whatsoever.
 
     This was uploaded with permission from the original mod author, Gan@伪物
