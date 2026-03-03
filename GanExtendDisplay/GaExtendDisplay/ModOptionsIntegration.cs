@@ -238,7 +238,9 @@ namespace GanExtendDisplay
       <choice contentId=""ExtDisplay.Hide""/>
       <choice contentId=""ExtDisplay.Disable""/>
     </one_choice>
-    <toggle id=""tg_l1pcf"" contentId=""ExtDisplay.PCFac"" width=""25%""/>
+    <toggle id=""tg_l1pcf"" width=""25%"">
+      <contentId>ExtDisplay.PCFac</contentId>
+    </toggle>
     <slider id=""sl_l1sz"" contentId=""ExtDisplay.Size"" min=""10"" max=""30"" step=""1"" width=""25%""/>
   </hlayout>
 
@@ -249,7 +251,9 @@ namespace GanExtendDisplay
       <choice contentId=""ExtDisplay.Hide""/>
       <choice contentId=""ExtDisplay.Disable""/>
     </one_choice>
-    <toggle id=""tg_l2pcf"" contentId=""ExtDisplay.PCFac"" width=""25%""/>
+    <toggle id=""tg_l2pcf"" width=""25%"">
+      <contentId>ExtDisplay.PCFac</contentId>
+    </toggle>
     <slider id=""sl_l2sz"" contentId=""ExtDisplay.Size"" min=""10"" max=""30"" step=""1"" width=""25%""/>
   </hlayout>
 
@@ -260,7 +264,9 @@ namespace GanExtendDisplay
       <choice contentId=""ExtDisplay.Hide""/>
       <choice contentId=""ExtDisplay.Disable""/>
     </one_choice>
-    <toggle id=""tg_l3pcf"" contentId=""ExtDisplay.PCFac"" width=""25%""/>
+    <toggle id=""tg_l3pcf"" width=""25%"">
+      <contentId>ExtDisplay.PCFac</contentId>
+    </toggle>
     <slider id=""sl_l3sz"" contentId=""ExtDisplay.Size"" min=""10"" max=""30"" step=""1"" width=""25%""/>
   </hlayout>
 
@@ -271,7 +277,9 @@ namespace GanExtendDisplay
       <choice contentId=""ExtDisplay.Hide""/>
       <choice contentId=""ExtDisplay.Disable""/>
     </one_choice>
-    <toggle id=""tg_l4pcf"" contentId=""ExtDisplay.PCFac"" width=""25%""/>
+    <toggle id=""tg_l4pcf"" width=""25%"">
+      <contentId>ExtDisplay.PCFac</contentId>
+    </toggle>
     <slider id=""sl_l4sz"" contentId=""ExtDisplay.Size"" min=""10"" max=""30"" step=""1"" width=""25%""/>
   </hlayout>
 
@@ -282,7 +290,9 @@ namespace GanExtendDisplay
       <choice contentId=""ExtDisplay.Hide""/>
       <choice contentId=""ExtDisplay.Disable""/>
     </one_choice>
-    <toggle id=""tg_lRespcf"" contentId=""ExtDisplay.PCFac"" width=""25%""/>
+    <toggle id=""tg_lRespcf"" width=""25%"">
+      <contentId>ExtDisplay.PCFac</contentId>
+    </toggle>
     <slider id=""sl_lRessz"" contentId=""ExtDisplay.Size"" min=""10"" max=""30"" step=""1"" width=""25%""/>
   </hlayout>
 
@@ -293,7 +303,9 @@ namespace GanExtendDisplay
       <choice contentId=""ExtDisplay.Hide""/>
       <choice contentId=""ExtDisplay.Disable""/>
     </one_choice>
-    <toggle id=""tg_lAttpcf"" contentId=""ExtDisplay.PCFac"" width=""25%""/>
+    <toggle id=""tg_lAttpcf"" width=""25%"">
+      <contentId>ExtDisplay.PCFac</contentId>
+    </toggle>
     <slider id=""sl_lAttsz"" contentId=""ExtDisplay.Size"" min=""10"" max=""30"" step=""1"" width=""25%""/>
   </hlayout>
 
@@ -304,7 +316,9 @@ namespace GanExtendDisplay
       <choice contentId=""ExtDisplay.Hide""/>
       <choice contentId=""ExtDisplay.Disable""/>
     </one_choice>
-    <toggle id=""tg_lFavpcf"" contentId=""ExtDisplay.PCFac"" width=""25%""/>
+    <toggle id=""tg_lFavpcf"" width=""25%"">
+      <contentId>ExtDisplay.PCFac</contentId>
+    </toggle>
     <slider id=""sl_lFavsz"" contentId=""ExtDisplay.Size"" min=""10"" max=""30"" step=""1"" width=""25%""/>
   </hlayout>
 
@@ -315,7 +329,9 @@ namespace GanExtendDisplay
       <choice contentId=""ExtDisplay.Hide""/>
       <choice contentId=""ExtDisplay.Disable""/>
     </one_choice>
-    <toggle id=""tg_lActpcf"" contentId=""ExtDisplay.PCFac"" width=""20%""/>
+    <toggle id=""tg_lActpcf"" width=""20%"">
+      <contentId>ExtDisplay.PCFac</contentId>
+    </toggle>
     <slider id=""sl_lActsz"" contentId=""ExtDisplay.Size"" min=""10"" max=""30"" step=""1"" width=""20%""/>
     <slider id=""sl_lActipl"" contentId=""ExtDisplay.IPL"" min=""0"" max=""20"" step=""1"" width=""20%""/>
   </hlayout>
@@ -327,7 +343,9 @@ namespace GanExtendDisplay
       <choice contentId=""ExtDisplay.Hide""/>
       <choice contentId=""ExtDisplay.Disable""/>
     </one_choice>
-    <toggle id=""tg_lFeapcf"" contentId=""ExtDisplay.PCFac"" width=""20%""/>
+    <toggle id=""tg_lFeapcf"" width=""20%"">
+      <contentId>ExtDisplay.PCFac</contentId>
+    </toggle>
     <slider id=""sl_lFeasz"" contentId=""ExtDisplay.Size"" min=""10"" max=""30"" step=""1"" width=""20%""/>
     <slider id=""sl_lFeaipl"" contentId=""ExtDisplay.IPL"" min=""0"" max=""20"" step=""1"" width=""20%""/>
   </hlayout>
