@@ -51,7 +51,7 @@ namespace GanExtendDisplay
 			}
 			catch (Exception ex)
 			{
-				Main.Logger.LogWarning($"[GanExtendDisplay] Mod Options registration failed: {ex}");
+				Main.Logger.LogWarning("[GanExtendDisplay] Mod Options registration failed: " + ex);
 			}
 		}
 
