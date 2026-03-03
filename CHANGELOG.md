@@ -28,7 +28,7 @@ This mod ships built-in help pages (`LangMod/*/Text/Help/help.txt`) readable thr
 
 Soft-dependency integration with EvilMask's [Mod Options](https://steamcommunity.com/workshop/filedetails/?id=3381182341) (GUID `evilmask.elinplugins.modoptions`).
 
-**Detection strategy:** Uses a runtime loop over `ModManager.ListPluginObject` rather than a `[BepInDependency(SoftDependency)]` attribute. This avoids a known BepInEx issue where a soft dependency that itself has an unmet hard dependency causes the depending plugin to fail, even though the dependency is declared optional.
+**Detection strategy:** Uses `BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey(guid)` rather than a `[BepInDependency(SoftDependency)]` attribute. This avoids a known BepInEx issue where a soft dependency that itself has an unmet hard dependency causes the depending plugin to fail, even though the dependency is declared optional. `Chainloader.PluginInfos` is guaranteed to be fully populated before any plugin's `Start()` is called.
 
 **Registration:** `ModOptionsIntegration.TryRegister(this)` is called at the end of `Main.Start()`. It exits immediately when Mod Options is absent. When Mod Options is present it calls `ModOptionController.Register(guid, tooltipId)`, sets all translations, loads the XML layout, and subscribes to `OnBuildUI`.
 

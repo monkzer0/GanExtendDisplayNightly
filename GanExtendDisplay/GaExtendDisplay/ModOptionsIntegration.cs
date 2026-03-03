@@ -39,20 +39,12 @@ namespace GanExtendDisplay
 		/// </summary>
 		internal static void TryRegister(BaseUnityPlugin plugin)
 		{
-			// Iterate loaded plugins rather than using [BepInDependency(SoftDependency)],
-			// which has a known BepInEx issue where a soft dep with an unmet hard dep
-			// causes the depending plugin to fail even though it is optional.
-			bool found = false;
-			foreach (var obj in ModManager.ListPluginObject)
-			{
-				if (obj is BaseUnityPlugin p && p.Info.Metadata.GUID == ModOptionsGuid)
-				{
-					found = true;
-					break;
-				}
-			}
-
-			if (!found)
+			// Use BepInEx's own plugin registry rather than [BepInDependency(SoftDependency)]
+			// (which has a known issue where a soft dep with an unmet hard dep causes the
+			// depending plugin to fail) or ModManager.ListPluginObject (which may not
+			// contain BepInEx plugins, or may not be populated at Start() time).
+			// Chainloader.PluginInfos is guaranteed to be fully populated before Start().
+			if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey(ModOptionsGuid))
 				return;
 
 			try
