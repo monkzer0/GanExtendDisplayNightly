@@ -80,9 +80,17 @@
       <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Elin\Elin_Data\Managed\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <!-- Soft dependency — only needed at compile time. Not copied to output.      -->
+    <!-- Install Mod Options from Steam Workshop so this DLL exists at this path.  -->
+    <!-- Workshop ID: 3381182341  (EvilMask's Mod Options)                         -->
+    <Reference Include="ModOptions">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Elin\Package\Mod_ModOptions\ModOptions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CardDisplayClass.cs" />
+    <Compile Include="ModOptionsIntegration.cs" />
     <Compile Include="CharaDisplayElementsClass.cs" />
     <Compile Include="CharaDisplayClass.cs" />
     <Compile Include="CS.cs" />

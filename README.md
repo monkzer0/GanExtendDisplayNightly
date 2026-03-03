@@ -57,9 +57,20 @@ The UI widget that shows status effects displays the same extra detail on hover.
 
 ---
 
+## Mod Options (optional)
+
+If you install [Mod Options](https://steamcommunity.com/workshop/filedetails/?id=3381182341) by EvilMask, all settings for this mod appear in an in-game panel — no need to edit the config file by hand.
+
+Mod Options is a **soft dependency**: the mod works normally without it. If it is installed, a tab labelled **Extend Display** appears in the Mod Options UI.
+
+- Changes to character display lines (mode, font size, faction filter, items per line) take effect **immediately** without restarting.
+- Changes to the five main feature toggles (Character Display, Thing Display, etc.) take effect on the **next game restart**, because those control whether Harmony patches are applied at startup.
+
+---
+
 ## Configuration
 
-The config file is at `Elin\BepInEx\config\ExtendDisplay.cfg`. If you have the BepInEx config manager installed, you can also edit settings in-game.
+The config file is at `Elin\BepInEx\config\ExtendDisplay.cfg`. If you have the BepInEx config manager or Mod Options installed, you can also edit settings in-game.
 
 Each display section accepts three values:
 
@@ -182,9 +193,20 @@ This fork is uploaded and maintained with permission from the original author.
 
 ---
 
+## Mod Options（可选）
+
+安装 EvilMask 的 [Mod Options](https://steamcommunity.com/workshop/filedetails/?id=3381182341) 后，本模组的所有设置将显示在游戏内面板中，无需手动编辑配置文件。
+
+Mod Options 为**软依赖**：未安装时本模组正常运行。安装后，Mod Options UI 中会出现名为 **Extend Display** 的标签页。
+
+- 角色显示行的更改（显示模式、字体大小、阵营过滤、每行条目数）**立即生效**，无需重启游戏。
+- 五项主要功能开关（角色显示、物品显示等）的更改在**下次启动游戏**后生效，因为这些开关控制 Harmony 补丁是否在启动时加载。
+
+---
+
 ## 配置
 
-配置文件位于 `Elin\BepInEx\config\ExtendDisplay.cfg`。若已安装 BepInEx 配置管理器，也可在游戏内直接编辑。
+配置文件位于 `Elin\BepInEx\config\ExtendDisplay.cfg`。若已安装 BepInEx 配置管理器或 Mod Options，也可在游戏内直接编辑。
 
 每个显示项支持三个值：
 

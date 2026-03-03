@@ -4,6 +4,39 @@ Developer-focused record of all changes from the original [GanExtendDisplay](htt
 
 ---
 
+## [fork] — Mod Options integration
+
+### Added — `ModOptionsIntegration.cs` (new file)
+
+Soft-dependency integration with EvilMask's [Mod Options](https://steamcommunity.com/workshop/filedetails/?id=3381182341) (GUID `evilmask.elinplugins.modoptions`).
+
+**Detection strategy:** Uses a runtime loop over `ModManager.ListPluginObject` rather than a `[BepInDependency(SoftDependency)]` attribute. This avoids a known BepInEx issue where a soft dependency that itself has an unmet hard dependency causes the depending plugin to fail, even though the dependency is declared optional.
+
+**Registration:** `ModOptionsIntegration.TryRegister(this)` is called at the end of `Main.Start()`. It exits immediately when Mod Options is absent. When Mod Options is present it calls `ModOptionController.Register(guid, tooltipId)`, sets all translations, loads the XML layout, and subscribes to `OnBuildUI`.
+
+**UI layout:** Defined in XML via `SetPreBuildWithXml()`. Two sections:
+- *Affected Display* — five `<one_choice type="dropdown">` elements (Keep / Hide / Disable) for CharaDisplay, ThingDisplay, InteractDisplay, NotificationUI, EnchantDisplay.
+- *Character Display Lines* — nine groups, each with a dropdown (mode), toggle (PCFactionOnly), and slider (font size). Act and Feat lines add a second slider for Items Per Line.
+
+**Live updates for character lines:** Each `OnValueChanged` handler updates its `ConfigEntry<T>` then calls `RefreshCharaSettings()`, which re-instantiates all nine `CharaConfigClass` objects from the current `ConfigEntry` values. This gives immediate in-game effect for mode, PCFactionOnly, and font size changes without a game restart.
+
+**Restart required for main feature toggles:** The five Affected Display dropdowns update their `ConfigEntry` values (which are persisted to the `.cfg` file) but Harmony patches are applied once at startup, so those changes take effect on the next launch.
+
+**ItemsPerLine sliders** do not call `RefreshCharaSettings()` — those values are already read live directly from `ConfigEntry<int>.Value` at render time.
+
+**Translations:** All labels registered in English, Japanese, and Simplified Chinese via `controller.SetTranslation(id, en, jp, cn)`.
+
+### Changed — `Mod_ExtendDisplay.cs`
+
+Added `ModOptionsIntegration.TryRegister(this)` call at the end of `Start()`.
+
+### Changed — `GanExtendDisplay.csproj`
+
+- Added `<Compile Include="ModOptionsIntegration.cs" />`.
+- Added `<Reference Include="ModOptions">` pointing to `Elin\Package\Mod_ModOptions\ModOptions.dll` with `<Private>False</Private>` (compile-time reference only; not copied to the mod's output folder).
+
+---
+
 ## [0.23.273.1] — Nightly Patch 2
 
 **Target:** Elin 23.273 Nightly Patch 2
