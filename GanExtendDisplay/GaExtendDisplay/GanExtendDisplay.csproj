@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CardDisplayClass.cs" />
+    <Compile Include="ModOptionsImpl.cs" />
     <Compile Include="ModOptionsIntegration.cs" />
     <Compile Include="CharaDisplayElementsClass.cs" />
     <Compile Include="CharaDisplayClass.cs" />
