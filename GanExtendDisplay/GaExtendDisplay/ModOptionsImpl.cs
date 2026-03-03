@@ -157,43 +157,43 @@ namespace GanExtendDisplay
 		// -------------------------------------------------------------------------
 
 		private static string BuildXml() => @"<config>
-  <text align=""middle"">ExtDisplay.Sec.Affected</text>
+  <topic>ExtDisplay.Sec.Affected</topic>
   <text>ExtDisplay.F.AffectedNote</text>
-  <text align=""middle"">ExtDisplay.F.Chara</text>
+  <topic>ExtDisplay.F.Chara</topic>
   <one_choice id=""dd_charaDisp"" type=""dropdown"">
     <choice><contentId>ExtDisplay.Keep</contentId></choice>
     <choice><contentId>ExtDisplay.Hide</contentId></choice>
     <choice><contentId>ExtDisplay.Disable</contentId></choice>
   </one_choice>
-  <text align=""middle"">ExtDisplay.F.Thing</text>
+  <topic>ExtDisplay.F.Thing</topic>
   <one_choice id=""dd_thingDisp"" type=""dropdown"">
     <choice><contentId>ExtDisplay.Keep</contentId></choice>
     <choice><contentId>ExtDisplay.Hide</contentId></choice>
     <choice><contentId>ExtDisplay.Disable</contentId></choice>
   </one_choice>
-  <text align=""middle"">ExtDisplay.F.Interact</text>
+  <topic>ExtDisplay.F.Interact</topic>
   <one_choice id=""dd_interactDisp"" type=""dropdown"">
     <choice><contentId>ExtDisplay.Keep</contentId></choice>
     <choice><contentId>ExtDisplay.Hide</contentId></choice>
     <choice><contentId>ExtDisplay.Disable</contentId></choice>
   </one_choice>
-  <text align=""middle"">ExtDisplay.F.Notif</text>
+  <topic>ExtDisplay.F.Notif</topic>
   <one_choice id=""dd_notifDisp"" type=""dropdown"">
     <choice><contentId>ExtDisplay.Keep</contentId></choice>
     <choice><contentId>ExtDisplay.Hide</contentId></choice>
     <choice><contentId>ExtDisplay.Disable</contentId></choice>
   </one_choice>
-  <text align=""middle"">ExtDisplay.F.Enchant</text>
+  <topic>ExtDisplay.F.Enchant</topic>
   <one_choice id=""dd_enchantDisp"" type=""dropdown"">
     <choice><contentId>ExtDisplay.Keep</contentId></choice>
     <choice><contentId>ExtDisplay.Hide</contentId></choice>
     <choice><contentId>ExtDisplay.Disable</contentId></choice>
   </one_choice>
 
-  <text align=""middle"">ExtDisplay.Sec.Chara</text>
+  <topic>ExtDisplay.Sec.Chara</topic>
   <text>ExtDisplay.CharaNote</text>
 
-  <text align=""middle"">ExtDisplay.L.L1</text>
+  <topic>ExtDisplay.L.L1</topic>
   <hlayout>
     <one_choice id=""dd_l1"" type=""dropdown"" width=""50%"">
       <choice><contentId>ExtDisplay.Keep</contentId></choice>
@@ -206,7 +206,7 @@ namespace GanExtendDisplay
     <slider id=""sl_l1sz"" min=""10"" max=""30"" step=""1"" width=""25%""/>
   </hlayout>
 
-  <text align=""middle"">ExtDisplay.L.L2</text>
+  <topic>ExtDisplay.L.L2</topic>
   <hlayout>
     <one_choice id=""dd_l2"" type=""dropdown"" width=""50%"">
       <choice><contentId>ExtDisplay.Keep</contentId></choice>
@@ -219,7 +219,7 @@ namespace GanExtendDisplay
     <slider id=""sl_l2sz"" min=""10"" max=""30"" step=""1"" width=""25%""/>
   </hlayout>
 
-  <text align=""middle"">ExtDisplay.L.L3</text>
+  <topic>ExtDisplay.L.L3</topic>
   <hlayout>
     <one_choice id=""dd_l3"" type=""dropdown"" width=""50%"">
       <choice><contentId>ExtDisplay.Keep</contentId></choice>
@@ -232,7 +232,7 @@ namespace GanExtendDisplay
     <slider id=""sl_l3sz"" min=""10"" max=""30"" step=""1"" width=""25%""/>
   </hlayout>
 
-  <text align=""middle"">ExtDisplay.L.L4</text>
+  <topic>ExtDisplay.L.L4</topic>
   <hlayout>
     <one_choice id=""dd_l4"" type=""dropdown"" width=""50%"">
       <choice><contentId>ExtDisplay.Keep</contentId></choice>
@@ -245,7 +245,7 @@ namespace GanExtendDisplay
     <slider id=""sl_l4sz"" min=""10"" max=""30"" step=""1"" width=""25%""/>
   </hlayout>
 
-  <text align=""middle"">ExtDisplay.L.Res</text>
+  <topic>ExtDisplay.L.Res</topic>
   <hlayout>
     <one_choice id=""dd_lRes"" type=""dropdown"" width=""50%"">
       <choice><contentId>ExtDisplay.Keep</contentId></choice>
@@ -258,7 +258,7 @@ namespace GanExtendDisplay
     <slider id=""sl_lRessz"" min=""10"" max=""30"" step=""1"" width=""25%""/>
   </hlayout>
 
-  <text align=""middle"">ExtDisplay.L.Att</text>
+  <topic>ExtDisplay.L.Att</topic>
   <hlayout>
     <one_choice id=""dd_lAtt"" type=""dropdown"" width=""50%"">
       <choice><contentId>ExtDisplay.Keep</contentId></choice>
@@ -271,7 +271,7 @@ namespace GanExtendDisplay
     <slider id=""sl_lAttsz"" min=""10"" max=""30"" step=""1"" width=""25%""/>
   </hlayout>
 
-  <text align=""middle"">ExtDisplay.L.Fav</text>
+  <topic>ExtDisplay.L.Fav</topic>
   <hlayout>
     <one_choice id=""dd_lFav"" type=""dropdown"" width=""50%"">
       <choice><contentId>ExtDisplay.Keep</contentId></choice>
@@ -284,7 +284,7 @@ namespace GanExtendDisplay
     <slider id=""sl_lFavsz"" min=""10"" max=""30"" step=""1"" width=""25%""/>
   </hlayout>
 
-  <text align=""middle"">ExtDisplay.L.Act</text>
+  <topic>ExtDisplay.L.Act</topic>
   <hlayout>
     <one_choice id=""dd_lAct"" type=""dropdown"" width=""40%"">
       <choice><contentId>ExtDisplay.Keep</contentId></choice>
@@ -298,7 +298,7 @@ namespace GanExtendDisplay
     <slider id=""sl_lActipl"" min=""0"" max=""20"" step=""1"" width=""20%""/>
   </hlayout>
 
-  <text align=""middle"">ExtDisplay.L.Fea</text>
+  <topic>ExtDisplay.L.Fea</topic>
   <hlayout>
     <one_choice id=""dd_lFea"" type=""dropdown"" width=""40%"">
       <choice><contentId>ExtDisplay.Keep</contentId></choice>
