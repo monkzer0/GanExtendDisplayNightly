@@ -41,13 +41,13 @@ namespace GanExtendDisplay
 			if (PluginSettings.ThingDisplay.Value != "Disable") {
 				Harmony.CreateAndPatchAll(typeof(ThingDisplay), null);
 			}
-			if (PluginSettings.ThingDisplay.Value != "Disable") {
+			if (PluginSettings.InteractDisplay.Value != "Disable") {
 				Harmony.CreateAndPatchAll(typeof(InteractDisplay), null);
 			}
 			if (PluginSettings.NotificationUI.Value != "Disable") {
 				Harmony.CreateAndPatchAll(typeof(NotificationUI), null);
 			}
-			if (PluginSettings.NotificationUI.Value != "Disable") {
+			if (PluginSettings.EnchantDisplay.Value != "Disable") {
 				Harmony.CreateAndPatchAll(typeof(EnchantDisplay), null);
 			}
 			Main.Logger.LogInfo("Successfully applied patches for [ Gan Extend Display ] plugin.");

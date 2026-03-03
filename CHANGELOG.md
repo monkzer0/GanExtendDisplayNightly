@@ -4,6 +4,35 @@ Developer-focused record of all changes from the original [GanExtendDisplay](htt
 
 ---
 
+## [fork] — Pre-existing patch-guard and config-entry bug fixes
+
+Three copy-paste bugs in the original port; all three caused the wrong config entry to control a feature's behaviour.
+
+### Fixed — `Mod_ExtendDisplay.cs`
+
+**`InteractDisplay` patch guarded by the wrong config entry**
+
+`Harmony.CreateAndPatchAll(typeof(InteractDisplay))` was wrapped in `if (PluginSettings.ThingDisplay.Value != "Disable")`. Should be `InteractDisplay`. Effect: disabling `ThingDisplay` silently killed `InteractDisplay`; setting `InteractDisplay = Disable` had no effect on whether the patches loaded.
+
+**`EnchantDisplay` patch guarded by the wrong config entry**
+
+`Harmony.CreateAndPatchAll(typeof(EnchantDisplay))` was wrapped in `if (PluginSettings.NotificationUI.Value != "Disable")`. Should be `EnchantDisplay`. Same class of bug.
+
+### Fixed — `MainExtendDisplay.cs`
+
+**`NotificationUI.NotificationUiConfig` initialised from the wrong config entry**
+
+```csharp
+// before
+public static ConfigClass NotificationUiConfig = new ConfigClass(PluginSettings.CharaDisplay.Value);
+// after
+public static ConfigClass NotificationUiConfig = new ConfigClass(PluginSettings.NotificationUI.Value);
+```
+
+`NotificationUiConfig.OptionStatus` (and therefore its `CheckStatus` property) was derived from the `CharaDisplay` config value, not `NotificationUI`. Result: the Hide / Keep mode of all three notification patches followed `CharaDisplay` instead of their own setting.
+
+---
+
 ## [fork] — Companion mod documentation
 
 ### Documented — Mod Help support
@@ -185,6 +214,6 @@ CharaSettings.CharaDisplayLineFeatSettings = new CharaConfigClass(
 
 The `TrimEnd` calls at the end of both the act and feat loops (intended to strip a trailing comma) are functionally inert. Each item is individually wrapped in `TagSize`/`TagColor`, so the full string always ends with a closing tag (`</size>`), never a visible character. The trailing comma after the last item therefore remains visible in game. This is pre-existing behavior carried over from the original mod; left as-is until a broader rewrite is warranted.
 
-**`CharaConfigClass.Size` is set at startup**
+**`CharaConfigClass.Size` live-update scope**
 
-`Size` (font size) is baked into the `CharaConfigClass` instance during `Start()`. Unlike `ItemsPerLine`, a live change to a size setting via the config manager does not take effect until the next game restart. This is also pre-existing behavior.
+`Size` is baked into the `CharaConfigClass` instance at construction time. When changed through Mod Options, `BindDDSzLive` calls `RefreshCharaSettings()`, which re-constructs all nine `CharaConfigClass` instances — so size changes via Mod Options take effect immediately. Changes made by editing the `.cfg` file directly (without Mod Options) still require a game restart.

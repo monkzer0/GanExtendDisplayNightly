@@ -50,7 +50,7 @@ namespace GanExtendDisplay
 		通知UI
 		*/
 
-		public static ConfigClass NotificationUiConfig = new ConfigClass(PluginSettings.CharaDisplay.Value);
+		public static ConfigClass NotificationUiConfig = new ConfigClass(PluginSettings.NotificationUI.Value);
 
 		//通知显示
 		[HarmonyPrefix]
