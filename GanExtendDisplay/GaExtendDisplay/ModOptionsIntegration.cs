@@ -24,6 +24,7 @@ using BepInEx;
 using BepInEx.Configuration;
 using EvilMask.Elin.ModOptions;
 using EvilMask.Elin.ModOptions.UI;
+using UnityEngine.UI;
 
 namespace GanExtendDisplay
 {
@@ -185,32 +186,10 @@ namespace GanExtendDisplay
 				"PC Faction Only",
 				"PC派閥のみ",
 				"仅玩家阵营");
-			T(ctrl, "ExtDisplay.Size.10", "10", "10", "10");
-			T(ctrl, "ExtDisplay.Size.12", "12", "12", "12");
-			T(ctrl, "ExtDisplay.Size.13", "13", "13", "13");
-			T(ctrl, "ExtDisplay.Size.14", "14", "14", "14");
-			T(ctrl, "ExtDisplay.Size.15", "15", "15", "15");
-			T(ctrl, "ExtDisplay.Size.16", "16", "16", "16");
-			T(ctrl, "ExtDisplay.Size.17", "17", "17", "17");
-			T(ctrl, "ExtDisplay.Size.18", "18", "18", "18");
-			T(ctrl, "ExtDisplay.Size.19", "19", "19", "19");
-			T(ctrl, "ExtDisplay.Size.20", "20", "20", "20");
-			T(ctrl, "ExtDisplay.Size.22", "22", "22", "22");
-			T(ctrl, "ExtDisplay.Size.24", "24", "24", "24");
 			T(ctrl, "ExtDisplay.IPL",
-				"Items Per Line:",
-				"1行の件数:",
-				"每行条目数:");
-			T(ctrl, "ExtDisplay.IPL.0",  "0  (no limit)", "0（無制限）", "0（不限制）");
-			T(ctrl, "ExtDisplay.IPL.2",  "2",  "2",  "2");
-			T(ctrl, "ExtDisplay.IPL.3",  "3",  "3",  "3");
-			T(ctrl, "ExtDisplay.IPL.4",  "4",  "4",  "4");
-			T(ctrl, "ExtDisplay.IPL.5",  "5",  "5",  "5");
-			T(ctrl, "ExtDisplay.IPL.6",  "6",  "6",  "6");
-			T(ctrl, "ExtDisplay.IPL.7",  "7",  "7",  "7");
-			T(ctrl, "ExtDisplay.IPL.8",  "8",  "8",  "8");
-			T(ctrl, "ExtDisplay.IPL.9",  "9",  "9",  "9");
-			T(ctrl, "ExtDisplay.IPL.10", "10", "10", "10");
+				"Items Per Line (0 = no limit):",
+				"1行の件数（0 = 無制限）:",
+				"每行条目数（0 = 不限制）:");
 
 			// Character line change note
 			T(ctrl, "ExtDisplay.CharaNote",
@@ -275,20 +254,7 @@ namespace GanExtendDisplay
     <toggle id=""tg_l1pcf"" width=""20%"">
       <contentId>ExtDisplay.PCFac</contentId>
     </toggle>
-    <one_choice id=""dd_l1sz"" type=""dropdown"" width=""40%"">
-      <choice><contentId>ExtDisplay.Size.10</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.12</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.13</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.14</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.15</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.16</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.17</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.18</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.19</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.20</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.22</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.24</contentId></choice>
-    </one_choice>
+    <input id=""in_l1sz"" width=""40%""/>
   </hlayout>
 
   <topic>ExtDisplay.L.L2</topic>
@@ -301,20 +267,7 @@ namespace GanExtendDisplay
     <toggle id=""tg_l2pcf"" width=""20%"">
       <contentId>ExtDisplay.PCFac</contentId>
     </toggle>
-    <one_choice id=""dd_l2sz"" type=""dropdown"" width=""40%"">
-      <choice><contentId>ExtDisplay.Size.10</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.12</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.13</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.14</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.15</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.16</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.17</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.18</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.19</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.20</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.22</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.24</contentId></choice>
-    </one_choice>
+    <input id=""in_l2sz"" width=""40%""/>
   </hlayout>
 
   <topic>ExtDisplay.L.L3</topic>
@@ -327,20 +280,7 @@ namespace GanExtendDisplay
     <toggle id=""tg_l3pcf"" width=""20%"">
       <contentId>ExtDisplay.PCFac</contentId>
     </toggle>
-    <one_choice id=""dd_l3sz"" type=""dropdown"" width=""40%"">
-      <choice><contentId>ExtDisplay.Size.10</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.12</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.13</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.14</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.15</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.16</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.17</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.18</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.19</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.20</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.22</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.24</contentId></choice>
-    </one_choice>
+    <input id=""in_l3sz"" width=""40%""/>
   </hlayout>
 
   <topic>ExtDisplay.L.L4</topic>
@@ -353,20 +293,7 @@ namespace GanExtendDisplay
     <toggle id=""tg_l4pcf"" width=""20%"">
       <contentId>ExtDisplay.PCFac</contentId>
     </toggle>
-    <one_choice id=""dd_l4sz"" type=""dropdown"" width=""40%"">
-      <choice><contentId>ExtDisplay.Size.10</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.12</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.13</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.14</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.15</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.16</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.17</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.18</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.19</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.20</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.22</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.24</contentId></choice>
-    </one_choice>
+    <input id=""in_l4sz"" width=""40%""/>
   </hlayout>
 
   <topic>ExtDisplay.L.Res</topic>
@@ -379,20 +306,7 @@ namespace GanExtendDisplay
     <toggle id=""tg_lRespcf"" width=""20%"">
       <contentId>ExtDisplay.PCFac</contentId>
     </toggle>
-    <one_choice id=""dd_lRessz"" type=""dropdown"" width=""40%"">
-      <choice><contentId>ExtDisplay.Size.10</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.12</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.13</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.14</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.15</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.16</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.17</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.18</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.19</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.20</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.22</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.24</contentId></choice>
-    </one_choice>
+    <input id=""in_lRessz"" width=""40%""/>
   </hlayout>
 
   <topic>ExtDisplay.L.Att</topic>
@@ -405,20 +319,7 @@ namespace GanExtendDisplay
     <toggle id=""tg_lAttpcf"" width=""20%"">
       <contentId>ExtDisplay.PCFac</contentId>
     </toggle>
-    <one_choice id=""dd_lAttsz"" type=""dropdown"" width=""40%"">
-      <choice><contentId>ExtDisplay.Size.10</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.12</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.13</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.14</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.15</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.16</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.17</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.18</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.19</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.20</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.22</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.24</contentId></choice>
-    </one_choice>
+    <input id=""in_lAttsz"" width=""40%""/>
   </hlayout>
 
   <topic>ExtDisplay.L.Fav</topic>
@@ -431,20 +332,7 @@ namespace GanExtendDisplay
     <toggle id=""tg_lFavpcf"" width=""20%"">
       <contentId>ExtDisplay.PCFac</contentId>
     </toggle>
-    <one_choice id=""dd_lFavsz"" type=""dropdown"" width=""40%"">
-      <choice><contentId>ExtDisplay.Size.10</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.12</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.13</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.14</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.15</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.16</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.17</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.18</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.19</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.20</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.22</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.24</contentId></choice>
-    </one_choice>
+    <input id=""in_lFavsz"" width=""40%""/>
   </hlayout>
 
   <topic>ExtDisplay.L.Act</topic>
@@ -457,34 +345,10 @@ namespace GanExtendDisplay
     <toggle id=""tg_lActpcf"" width=""20%"">
       <contentId>ExtDisplay.PCFac</contentId>
     </toggle>
-    <one_choice id=""dd_lActsz"" type=""dropdown"" width=""40%"">
-      <choice><contentId>ExtDisplay.Size.10</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.12</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.13</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.14</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.15</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.16</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.17</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.18</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.19</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.20</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.22</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.24</contentId></choice>
-    </one_choice>
+    <input id=""in_lActsz"" width=""40%""/>
   </hlayout>
   <text align=""left"">ExtDisplay.IPL</text>
-  <one_choice id=""dd_lActipl"" type=""dropdown"" width=""40%"">
-    <choice><contentId>ExtDisplay.IPL.0</contentId></choice>
-    <choice><contentId>ExtDisplay.IPL.2</contentId></choice>
-    <choice><contentId>ExtDisplay.IPL.3</contentId></choice>
-    <choice><contentId>ExtDisplay.IPL.4</contentId></choice>
-    <choice><contentId>ExtDisplay.IPL.5</contentId></choice>
-    <choice><contentId>ExtDisplay.IPL.6</contentId></choice>
-    <choice><contentId>ExtDisplay.IPL.7</contentId></choice>
-    <choice><contentId>ExtDisplay.IPL.8</contentId></choice>
-    <choice><contentId>ExtDisplay.IPL.9</contentId></choice>
-    <choice><contentId>ExtDisplay.IPL.10</contentId></choice>
-  </one_choice>
+  <input id=""in_lActipl"" width=""40%""/>
 
   <topic>ExtDisplay.L.Fea</topic>
   <hlayout align=""left"">
@@ -496,34 +360,10 @@ namespace GanExtendDisplay
     <toggle id=""tg_lFeapcf"" width=""20%"">
       <contentId>ExtDisplay.PCFac</contentId>
     </toggle>
-    <one_choice id=""dd_lFeasz"" type=""dropdown"" width=""40%"">
-      <choice><contentId>ExtDisplay.Size.10</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.12</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.13</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.14</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.15</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.16</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.17</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.18</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.19</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.20</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.22</contentId></choice>
-      <choice><contentId>ExtDisplay.Size.24</contentId></choice>
-    </one_choice>
+    <input id=""in_lFeasz"" width=""40%""/>
   </hlayout>
   <text align=""left"">ExtDisplay.IPL</text>
-  <one_choice id=""dd_lFeaipl"" type=""dropdown"" width=""40%"">
-    <choice><contentId>ExtDisplay.IPL.0</contentId></choice>
-    <choice><contentId>ExtDisplay.IPL.2</contentId></choice>
-    <choice><contentId>ExtDisplay.IPL.3</contentId></choice>
-    <choice><contentId>ExtDisplay.IPL.4</contentId></choice>
-    <choice><contentId>ExtDisplay.IPL.5</contentId></choice>
-    <choice><contentId>ExtDisplay.IPL.6</contentId></choice>
-    <choice><contentId>ExtDisplay.IPL.7</contentId></choice>
-    <choice><contentId>ExtDisplay.IPL.8</contentId></choice>
-    <choice><contentId>ExtDisplay.IPL.9</contentId></choice>
-    <choice><contentId>ExtDisplay.IPL.10</contentId></choice>
-  </one_choice>
+  <input id=""in_lFeaipl"" width=""40%""/>
 
   <vlayout height=""30""/>
 </config>";
@@ -544,43 +384,43 @@ namespace GanExtendDisplay
 			BindDD(builder, "dd_enchantDisp",  PluginSettings.EnchantDisplay);
 
 			// --- Character Lines (all live — re-bake CharaConfigClass on any change) ---
-			BindDDLive(builder, "dd_l1",      CharaSettings.CharaDisplayLine1);
-			BindTGLive(builder, "tg_l1pcf",   CharaSettings.CharaDisplayLine1PCFactionOnly);
-			BindDDSzLive(builder, "dd_l1sz",  CharaSettings.CharaDisplayLine1Size);
+			BindDDLive(builder, "dd_l1",        CharaSettings.CharaDisplayLine1);
+			BindTGLive(builder, "tg_l1pcf",     CharaSettings.CharaDisplayLine1PCFactionOnly);
+			BindInputIntLive(builder, "in_l1sz", CharaSettings.CharaDisplayLine1Size, 1);
 
-			BindDDLive(builder, "dd_l2",      CharaSettings.CharaDisplayLine2);
-			BindTGLive(builder, "tg_l2pcf",   CharaSettings.CharaDisplayLine2PCFactionOnly);
-			BindDDSzLive(builder, "dd_l2sz",  CharaSettings.CharaDisplayLine2Size);
+			BindDDLive(builder, "dd_l2",        CharaSettings.CharaDisplayLine2);
+			BindTGLive(builder, "tg_l2pcf",     CharaSettings.CharaDisplayLine2PCFactionOnly);
+			BindInputIntLive(builder, "in_l2sz", CharaSettings.CharaDisplayLine2Size, 1);
 
-			BindDDLive(builder, "dd_l3",      CharaSettings.CharaDisplayLine3);
-			BindTGLive(builder, "tg_l3pcf",   CharaSettings.CharaDisplayLine3PCFactionOnly);
-			BindDDSzLive(builder, "dd_l3sz",  CharaSettings.CharaDisplayLine3Size);
+			BindDDLive(builder, "dd_l3",        CharaSettings.CharaDisplayLine3);
+			BindTGLive(builder, "tg_l3pcf",     CharaSettings.CharaDisplayLine3PCFactionOnly);
+			BindInputIntLive(builder, "in_l3sz", CharaSettings.CharaDisplayLine3Size, 1);
 
-			BindDDLive(builder, "dd_l4",      CharaSettings.CharaDisplayLine4);
-			BindTGLive(builder, "tg_l4pcf",   CharaSettings.CharaDisplayLine4PCFactionOnly);
-			BindDDSzLive(builder, "dd_l4sz",  CharaSettings.CharaDisplayLine4Size);
+			BindDDLive(builder, "dd_l4",        CharaSettings.CharaDisplayLine4);
+			BindTGLive(builder, "tg_l4pcf",     CharaSettings.CharaDisplayLine4PCFactionOnly);
+			BindInputIntLive(builder, "in_l4sz", CharaSettings.CharaDisplayLine4Size, 1);
 
-			BindDDLive(builder, "dd_lRes",    CharaSettings.CharaDisplayLineResist);
-			BindTGLive(builder, "tg_lRespcf", CharaSettings.CharaDisplayLineResistPCFactionOnly);
-			BindDDSzLive(builder, "dd_lRessz",CharaSettings.CharaDisplayLineResistSize);
+			BindDDLive(builder, "dd_lRes",       CharaSettings.CharaDisplayLineResist);
+			BindTGLive(builder, "tg_lRespcf",    CharaSettings.CharaDisplayLineResistPCFactionOnly);
+			BindInputIntLive(builder, "in_lRessz", CharaSettings.CharaDisplayLineResistSize, 1);
 
-			BindDDLive(builder, "dd_lAtt",    CharaSettings.CharaDisplayLineAttributes);
-			BindTGLive(builder, "tg_lAttpcf", CharaSettings.CharaDisplayLineAttributesPCFactionOnly);
-			BindDDSzLive(builder, "dd_lAttsz",CharaSettings.CharaDisplayLineAttributesSize);
+			BindDDLive(builder, "dd_lAtt",       CharaSettings.CharaDisplayLineAttributes);
+			BindTGLive(builder, "tg_lAttpcf",    CharaSettings.CharaDisplayLineAttributesPCFactionOnly);
+			BindInputIntLive(builder, "in_lAttsz", CharaSettings.CharaDisplayLineAttributesSize, 1);
 
-			BindDDLive(builder, "dd_lFav",    CharaSettings.CharaDisplayLineFavgift);
-			BindTGLive(builder, "tg_lFavpcf", CharaSettings.CharaDisplayLineFavgiftPCFactionOnly);
-			BindDDSzLive(builder, "dd_lFavsz",CharaSettings.CharaDisplayLineFavgiftSize);
+			BindDDLive(builder, "dd_lFav",       CharaSettings.CharaDisplayLineFavgift);
+			BindTGLive(builder, "tg_lFavpcf",    CharaSettings.CharaDisplayLineFavgiftPCFactionOnly);
+			BindInputIntLive(builder, "in_lFavsz", CharaSettings.CharaDisplayLineFavgiftSize, 1);
 
-			BindDDLive(builder, "dd_lAct",    CharaSettings.CharaDisplayLineAct);
-			BindTGLive(builder, "tg_lActpcf", CharaSettings.CharaDisplayLineActPCFactionOnly);
-			BindDDSzLive(builder, "dd_lActsz",CharaSettings.CharaDisplayLineActSize);
-			BindDDIplLive(builder, "dd_lActipl", CharaSettings.CharaDisplayLineActItemsPerLine);
+			BindDDLive(builder, "dd_lAct",       CharaSettings.CharaDisplayLineAct);
+			BindTGLive(builder, "tg_lActpcf",    CharaSettings.CharaDisplayLineActPCFactionOnly);
+			BindInputIntLive(builder, "in_lActsz",  CharaSettings.CharaDisplayLineActSize, 1);
+			BindInputIntLive(builder, "in_lActipl", CharaSettings.CharaDisplayLineActItemsPerLine, 0);
 
-			BindDDLive(builder, "dd_lFea",    CharaSettings.CharaDisplayLineFeat);
-			BindTGLive(builder, "tg_lFeapcf", CharaSettings.CharaDisplayLineFeatPCFactionOnly);
-			BindDDSzLive(builder, "dd_lFeasz",CharaSettings.CharaDisplayLineFeatSize);
-			BindDDIplLive(builder, "dd_lFeaipl", CharaSettings.CharaDisplayLineFeatItemsPerLine);
+			BindDDLive(builder, "dd_lFea",       CharaSettings.CharaDisplayLineFeat);
+			BindTGLive(builder, "tg_lFeapcf",    CharaSettings.CharaDisplayLineFeatPCFactionOnly);
+			BindInputIntLive(builder, "in_lFeasz",  CharaSettings.CharaDisplayLineFeatSize, 1);
+			BindInputIntLive(builder, "in_lFeaipl", CharaSettings.CharaDisplayLineFeatItemsPerLine, 0);
 		}
 
 		// -------------------------------------------------------------------------
@@ -660,55 +500,22 @@ namespace GanExtendDisplay
 			tg.OnValueChanged += v => { e.Value = v; RefreshCharaSettings(); };
 		}
 
-		// -------------------------------------------------------------------------
-		// Font-size dropdown helpers — values {10,12,13,14,15,16,17,18,19,20,22,24}
-		// -------------------------------------------------------------------------
-
-		private static readonly int[] SzValues = { 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24 };
-
-		private static int ToSzIdx(int v)
+		// Bind integer input and re-bake CharaSettings on change.
+		// Accepts any integer >= min; non-numeric or out-of-range input is silently ignored.
+		private static void BindInputIntLive(OptionUIBuilder b, string id, ConfigEntry<int> e, int min = 0)
 		{
-			int best = 0;
-			for (int i = 1; i < SzValues.Length; i++)
-				if (Math.Abs(SzValues[i] - v) < Math.Abs(SzValues[best] - v))
-					best = i;
-			return best;
-		}
-
-		private static int FromSzIdx(int i) =>
-			SzValues[Math.Max(0, Math.Min(i, SzValues.Length - 1))];
-
-		private static void BindDDSzLive(OptionUIBuilder b, string id, ConfigEntry<int> e)
-		{
-			var dd = b.GetPreBuild<OptDropdown>(id);
-			if (dd == null) return;
-			dd.Value = ToSzIdx(e.Value);
-			dd.OnValueChanged += v => { e.Value = FromSzIdx(v); RefreshCharaSettings(); };
-		}
-
-		// -------------------------------------------------------------------------
-		// IPL dropdown helpers — values are {0, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-		// (1 is intentionally skipped; 0 means no limit)
-		// -------------------------------------------------------------------------
-
-		private static readonly int[] IplValues = { 0, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-
-		private static int ToIplIdx(int v)
-		{
-			for (int i = 0; i < IplValues.Length; i++)
-				if (IplValues[i] == v) return i;
-			return 0; // unknown value → "no limit"
-		}
-
-		private static int FromIplIdx(int i) =>
-			IplValues[Math.Max(0, Math.Min(i, IplValues.Length - 1))];
-
-		private static void BindDDIplLive(OptionUIBuilder b, string id, ConfigEntry<int> e)
-		{
-			var dd = b.GetPreBuild<OptDropdown>(id);
-			if (dd == null) return;
-			dd.Value = ToIplIdx(e.Value);
-			dd.OnValueChanged += v => { e.Value = FromIplIdx(v); RefreshCharaSettings(); };
+			var inp = b.GetPreBuild<OptInput>(id);
+			if (inp == null) return;
+			inp.Text = e.Value.ToString();
+			inp.ContentType = InputField.ContentType.IntegerNumber;
+			inp.OnValueChanged += s =>
+			{
+				if (int.TryParse(s, out int v) && v >= min)
+				{
+					e.Value = v;
+					RefreshCharaSettings();
+				}
+			};
 		}
 	}
 }
