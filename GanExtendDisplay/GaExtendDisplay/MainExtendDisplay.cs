@@ -58,7 +58,8 @@ namespace GanExtendDisplay
 		public static bool NotificationCondition_OnRefresh(NotificationCondition __instance) {
 			if (!Main.ModEnable) { return true; }
 			if (!NotificationUiConfig.CheckStatus) { return true; }
-			__instance.text = __instance.condition.GetText() + (" " + __instance.condition.value.ToString());
+			string condText = __instance.condition.GetText();
+			__instance.text = condText.IsEmpty() ? condText : condText + " " + __instance.condition.value.ToString();
 			__instance.item.button.mainText.color = __instance.condition.GetColor(__instance.item.button.skinRoot.GetButton().colorProf);
 			return false;
 		}
@@ -84,7 +85,8 @@ namespace GanExtendDisplay
 			if (__instance.item.button.icon.sprite == EClass.core.refs.spriteDefaultCondition) {
 				__instance.OnInstantiate();
 			}
-			__instance.text = __instance.condition.GetText() + " " + __instance.condition.value.ToString();
+			string buffText = __instance.condition.GetText();
+			__instance.text = buffText.IsEmpty() ? buffText : buffText + " " + __instance.condition.value.ToString();
 			__instance.item.textDuration.SetText(__instance.condition.TextDuration);
 			return false;
 		}

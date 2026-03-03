@@ -80,7 +80,7 @@ Install [Mod Options](https://steamcommunity.com/workshop/filedetails/?id=338118
 
 ## Configuration
 
-The config file is at `Elin\BepInEx\config\ExtendDisplay.cfg`. If you have the BepInEx config manager, [Mod Options](https://steamcommunity.com/workshop/filedetails/?id=3381182341), or [Mod Config GUI](https://steamcommunity.com/sharedfiles/filedetails/?id=3379819704) installed, you can also edit settings in-game.
+The config file is at `Elin\BepInEx\config\ExtendDisplay.cfg`. With [Mod Options](https://steamcommunity.com/workshop/filedetails/?id=3381182341) or [Mod Config GUI](https://steamcommunity.com/sharedfiles/filedetails/?id=3379819704) installed, you can also edit settings in-game.
 
 Each display section accepts three values:
 
@@ -98,7 +98,7 @@ Each character stat line also has:
 | **Size** | Font size for that line |
 | **Items Per Line** *(acts and feats only)* | Wrap to a new line after this many entries; `0` means no limit |
 
-Config descriptions appear in **English, Simplified Chinese, and Japanese** in the config manager.
+Config descriptions are provided in **English, Simplified Chinese, and Japanese**.
 
 ---
 
@@ -117,7 +117,9 @@ The original mod was written for Elin's stable branch. The Nightly build periodi
 
 - **Feats on their own line** — feats are now independently toggled and displayed separately from acts, so you can show one without the other
 - **Configurable line wrapping** — characters with many feats or acts used to stretch the tooltip to full screen width; set *Items Per Line* to a positive number to wrap after that many entries (default `0` = no limit, matching original behavior)
-- **Trilingual config descriptions** — every config entry shows its description in English, Simplified Chinese, and Japanese in the config manager
+- **Trilingual config descriptions** — every config entry ships with a description in English, Simplified Chinese, and Japanese
+- **Native [Mod Options](https://steamcommunity.com/workshop/filedetails/?id=3381182341) panel** — a dedicated **Extend Display** tab with grouped settings, live updates for character line changes, and free-text number inputs for font size and items-per-line
+- **Built-in [Mod Help](https://steamcommunity.com/sharedfiles/filedetails/?id=3406542368) pages** — full in-game documentation in English, Simplified Chinese, and Japanese, readable without leaving the game
 
 ---
 
@@ -226,7 +228,7 @@ This fork is uploaded and maintained with permission from the original author.
 
 ## 配置
 
-配置文件位于 `Elin\BepInEx\config\ExtendDisplay.cfg`。若已安装 BepInEx 配置管理器、[Mod Options](https://steamcommunity.com/workshop/filedetails/?id=3381182341) 或 [Mod Config GUI](https://steamcommunity.com/sharedfiles/filedetails/?id=3379819704)，也可在游戏内直接编辑。
+配置文件位于 `Elin\BepInEx\config\ExtendDisplay.cfg`。若已安装 [Mod Options](https://steamcommunity.com/workshop/filedetails/?id=3381182341) 或 [Mod Config GUI](https://steamcommunity.com/sharedfiles/filedetails/?id=3379819704)，也可在游戏内直接编辑。
 
 每个显示项支持三个值：
 
@@ -244,7 +246,7 @@ This fork is uploaded and maintained with permission from the original author.
 | **Size** | 该行字体大小 |
 | **Items Per Line** *（仅行动/特技行）* | 每行显示条目数上限，超出后换行；`0` 表示不限制 |
 
-配置描述在配置管理器中以**英语、简体中文和日语**同时显示。
+配置说明以**英语、简体中文和日语**提供。
 
 ---
 
@@ -263,7 +265,9 @@ This fork is uploaded and maintained with permission from the original author.
 
 - **特技独立成行** — 特技现在可独立切换，与行动分开显示
 - **可配置换行** — 特技或行动过多时提示框会横向延伸至全屏；设置 *Items Per Line* 为正整数可在达到数量后换行（默认 `0` = 不限制）
-- **三语配置说明** — 配置管理器中每个配置项均以英语、简体中文和日语显示说明
+- **三语配置说明** — 每个配置项均附有英语、简体中文和日语说明
+- **原生 [Mod Options](https://steamcommunity.com/workshop/filedetails/?id=3381182341) 面板** — 专属的 **Extend Display** 标签页，支持分组设置、角色行实时更新，以及字体大小与每行条目数的自由文本输入
+- **内置 [Mod Help](https://steamcommunity.com/sharedfiles/filedetails/?id=3406542368) 页面** — 英语、简体中文和日语全文档，可在游戏内直接阅读
 
 ---
 
@@ -363,7 +367,7 @@ Elin Nightly ビルド向けに維持されている、[GanExtendDisplay](https:
 
 ## 設定
 
-設定ファイルは `Elin\BepInEx\config\ExtendDisplay.cfg` にあります。BepInEx コンフィグマネージャー、[Mod Options](https://steamcommunity.com/workshop/filedetails/?id=3381182341)、または [Mod Config GUI](https://steamcommunity.com/sharedfiles/filedetails/?id=3379819704) がインストールされていれば、ゲーム内でも設定を変更できます。
+設定ファイルは `Elin\BepInEx\config\ExtendDisplay.cfg` にあります。[Mod Options](https://steamcommunity.com/workshop/filedetails/?id=3381182341) または [Mod Config GUI](https://steamcommunity.com/sharedfiles/filedetails/?id=3379819704) がインストールされていれば、ゲーム内でも設定を変更できます。
 
 各表示セクションは3つの値を受け付けます：
 
@@ -381,7 +385,7 @@ Elin Nightly ビルド向けに維持されている、[GanExtendDisplay](https:
 | **Size** | その行のフォントサイズ |
 | **Items Per Line** *（行動・特技のみ）* | N件ごとに改行；`0` は無制限 |
 
-設定の説明は、コンフィグマネージャーで**英語・簡体字中国語・日本語**で表示されます。
+設定の説明は**英語・簡体字中国語・日本語**で提供されています。
 
 ---
 
@@ -400,7 +404,9 @@ Elin Nightly ビルド向けに維持されている、[GanExtendDisplay](https:
 
 - **特技を独立した行に** — 特技が独立して切り替え可能になり、行動とは別に表示
 - **設定可能な行折り返し** — 特技や行動が多い場合にツールチップが全画面幅に広がっていた；*Items Per Line* を正の数に設定することで、その件数ごとに折り返し（デフォルト `0` = 無制限、元の動作と同じ）
-- **三言語設定の説明** — すべての設定項目がコンフィグマネージャーで英語・簡体字中国語・日本語で表示
+- **三言語設定の説明** — すべての設定項目に英語・簡体字中国語・日本語の説明を同梱
+- **[Mod Options](https://steamcommunity.com/workshop/filedetails/?id=3381182341) ネイティブパネル** — **Extend Display** 専用タブ。設定をグループ化・ラベル付けし、キャラクター行設定のリアルタイム更新と、フォントサイズ・1行の件数の自由入力に対応
+- **[Mod Help](https://steamcommunity.com/sharedfiles/filedetails/?id=3406542368) 内蔵ヘルプページ** — 英語・簡体字中国語・日本語の完全なドキュメントをゲーム内から直接閲覧可能
 
 ---
 

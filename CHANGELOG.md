@@ -4,6 +4,45 @@ Developer-focused record of all changes from the original [GanExtendDisplay](htt
 
 ---
 
+## [fork] — Bugfix: bare number shown in vampire status widget
+
+### Fixed — `MainExtendDisplay.cs`
+
+**`NotificationCondition_OnRefresh` and `NotificationBuff_OnRefresh` always appended a numeric value**
+
+Both patches unconditionally concatenated the condition's numeric value onto the label text:
+
+```csharp
+// before
+__instance.text = __instance.condition.GetText() + (" " + __instance.condition.value.ToString());
+```
+
+When `GetText()` returns an empty string — as it does for certain vampire blood/thirst conditions at specific blood levels — the result was `"" + " 10"` = `" 10"`, rendering as a bare `"10"` in the player status widget.
+
+`NotificationStats_OnRefresh` already applied the correct guard. The same pattern is now used in both affected patches:
+
+```csharp
+// after
+string condText = __instance.condition.GetText();
+__instance.text = condText.IsEmpty() ? condText : condText + " " + __instance.condition.value.ToString();
+```
+
+The value suffix is now only appended when `GetText()` produces a non-empty string.
+
+---
+
+## [fork] — Mod Options: free-text integer inputs for font size and IPL
+
+### Changed — `ModOptionsIntegration.cs`
+
+Font size and Items Per Line fields replaced from constrained dropdowns to free-text integer inputs (`<input>` XML element / `OptInput` C# class). Users can now type any font size ≥ 1 or any IPL value ≥ 0 directly, rather than being limited to 12 preset size values or 10 preset IPL values.
+
+The size value translation keys (`ExtDisplay.Size.10` … `ExtDisplay.Size.24`) and IPL value translation keys (`ExtDisplay.IPL.0` … `ExtDisplay.IPL.10`) are removed — they were only needed as dropdown choice labels. The `ExtDisplay.IPL` label translation is updated to include "0 = no limit" inline.
+
+A new `BindInputIntLive` helper replaces `BindDDSzLive` and `BindDDIplLive`. It binds an `OptInput` to a `ConfigEntry<int>`, populates the field with the current config value, restricts keyboard input to integers via `InputField.ContentType.IntegerNumber`, and validates `value >= min` before writing to the entry and calling `RefreshCharaSettings()`. The old size/IPL index-mapping functions (`ToSzIdx`, `FromSzIdx`, `SzValues`, `ToIplIdx`, `FromIplIdx`, `IplValues`) are removed.
+
+---
+
 ## [fork] — Pre-existing patch-guard and config-entry bug fixes
 
 Three copy-paste bugs in the original port; all three caused the wrong config entry to control a feature's behaviour.
@@ -216,4 +255,4 @@ The `TrimEnd` calls at the end of both the act and feat loops (intended to strip
 
 **`CharaConfigClass.Size` live-update scope**
 
-`Size` is baked into the `CharaConfigClass` instance at construction time. When changed through Mod Options, `BindDDSzLive` calls `RefreshCharaSettings()`, which re-constructs all nine `CharaConfigClass` instances — so size changes via Mod Options take effect immediately. Changes made by editing the `.cfg` file directly (without Mod Options) still require a game restart.
+`Size` is baked into the `CharaConfigClass` instance at construction time. When changed through Mod Options, `BindInputIntLive` calls `RefreshCharaSettings()`, which re-constructs all nine `CharaConfigClass` instances — so size changes via Mod Options take effect immediately. Changes made by editing the `.cfg` file directly (without Mod Options) still require a game restart.
