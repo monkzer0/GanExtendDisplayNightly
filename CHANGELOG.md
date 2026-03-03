@@ -4,6 +4,24 @@ Developer-focused record of all changes from the original [GanExtendDisplay](htt
 
 ---
 
+## [fork] — Companion mod documentation
+
+### Documented — Mod Help support
+
+This mod ships built-in help pages (`LangMod/*/Text/Help/help.txt`) readable through [Mod Help](https://steamcommunity.com/sharedfiles/filedetails/?id=3406542368) by Drakeny. Help pages are available in English, Simplified Chinese, and Japanese. No code changes or special integration are required — Mod Help reads the help files automatically if it is installed.
+
+### Documented — Mod Config GUI compatibility
+
+[Mod Config GUI](https://steamcommunity.com/sharedfiles/filedetails/?id=3379819704) by xTracr works with this mod's standard BepInEx `.cfg` file without any special integration.
+
+### Changed — Documentation
+
+- **README.md** — Expanded "Mod Options (optional)" into "In-game configuration (optional)", covering all three companion mods: Mod Options (EvilMask), Mod Config GUI (xTracr), and Mod Help (Drakeny). Added full Japanese translation of the README.
+- **package.xml** — Updated description to mention Mod Options, Mod Config GUI, and Mod Help.
+- **Help files (EN/CN/JP)** — Updated all three language help files to document Mod Config GUI and Mod Help alongside the existing Mod Options section.
+
+---
+
 ## [fork] — Mod Options integration
 
 ### Added — `ModOptionsIntegration.cs` (new file)
