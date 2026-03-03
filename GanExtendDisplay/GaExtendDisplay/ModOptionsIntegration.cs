@@ -200,154 +200,159 @@ namespace GanExtendDisplay
 		// -------------------------------------------------------------------------
 
 		private static string BuildXml() => @"<config>
-  <topic contentId=""ExtDisplay.Sec.Affected""/>
-  <text contentId=""ExtDisplay.F.AffectedNote""/>
-  <one_choice id=""dd_charaDisp"" type=""dropdown"" contentId=""ExtDisplay.F.Chara"">
-    <choice contentId=""ExtDisplay.Keep""/>
-    <choice contentId=""ExtDisplay.Hide""/>
-    <choice contentId=""ExtDisplay.Disable""/>
+  <topic><contentId>ExtDisplay.Sec.Affected</contentId></topic>
+  <text><contentId>ExtDisplay.F.AffectedNote</contentId></text>
+  <one_choice id=""dd_charaDisp"" type=""dropdown"">
+    <contentId>ExtDisplay.F.Chara</contentId>
+    <choice><contentId>ExtDisplay.Keep</contentId></choice>
+    <choice><contentId>ExtDisplay.Hide</contentId></choice>
+    <choice><contentId>ExtDisplay.Disable</contentId></choice>
   </one_choice>
-  <one_choice id=""dd_thingDisp"" type=""dropdown"" contentId=""ExtDisplay.F.Thing"">
-    <choice contentId=""ExtDisplay.Keep""/>
-    <choice contentId=""ExtDisplay.Hide""/>
-    <choice contentId=""ExtDisplay.Disable""/>
+  <one_choice id=""dd_thingDisp"" type=""dropdown"">
+    <contentId>ExtDisplay.F.Thing</contentId>
+    <choice><contentId>ExtDisplay.Keep</contentId></choice>
+    <choice><contentId>ExtDisplay.Hide</contentId></choice>
+    <choice><contentId>ExtDisplay.Disable</contentId></choice>
   </one_choice>
-  <one_choice id=""dd_interactDisp"" type=""dropdown"" contentId=""ExtDisplay.F.Interact"">
-    <choice contentId=""ExtDisplay.Keep""/>
-    <choice contentId=""ExtDisplay.Hide""/>
-    <choice contentId=""ExtDisplay.Disable""/>
+  <one_choice id=""dd_interactDisp"" type=""dropdown"">
+    <contentId>ExtDisplay.F.Interact</contentId>
+    <choice><contentId>ExtDisplay.Keep</contentId></choice>
+    <choice><contentId>ExtDisplay.Hide</contentId></choice>
+    <choice><contentId>ExtDisplay.Disable</contentId></choice>
   </one_choice>
-  <one_choice id=""dd_notifDisp"" type=""dropdown"" contentId=""ExtDisplay.F.Notif"">
-    <choice contentId=""ExtDisplay.Keep""/>
-    <choice contentId=""ExtDisplay.Hide""/>
-    <choice contentId=""ExtDisplay.Disable""/>
+  <one_choice id=""dd_notifDisp"" type=""dropdown"">
+    <contentId>ExtDisplay.F.Notif</contentId>
+    <choice><contentId>ExtDisplay.Keep</contentId></choice>
+    <choice><contentId>ExtDisplay.Hide</contentId></choice>
+    <choice><contentId>ExtDisplay.Disable</contentId></choice>
   </one_choice>
-  <one_choice id=""dd_enchantDisp"" type=""dropdown"" contentId=""ExtDisplay.F.Enchant"">
-    <choice contentId=""ExtDisplay.Keep""/>
-    <choice contentId=""ExtDisplay.Hide""/>
-    <choice contentId=""ExtDisplay.Disable""/>
+  <one_choice id=""dd_enchantDisp"" type=""dropdown"">
+    <contentId>ExtDisplay.F.Enchant</contentId>
+    <choice><contentId>ExtDisplay.Keep</contentId></choice>
+    <choice><contentId>ExtDisplay.Hide</contentId></choice>
+    <choice><contentId>ExtDisplay.Disable</contentId></choice>
   </one_choice>
 
-  <topic contentId=""ExtDisplay.Sec.Chara""/>
-  <text contentId=""ExtDisplay.CharaNote""/>
+  <topic><contentId>ExtDisplay.Sec.Chara</contentId></topic>
+  <text><contentId>ExtDisplay.CharaNote</contentId></text>
 
-  <text contentId=""ExtDisplay.L.L1""/>
+  <text><contentId>ExtDisplay.L.L1</contentId></text>
   <hlayout>
     <one_choice id=""dd_l1"" type=""dropdown"" width=""50%"">
-      <choice contentId=""ExtDisplay.Keep""/>
-      <choice contentId=""ExtDisplay.Hide""/>
-      <choice contentId=""ExtDisplay.Disable""/>
+      <choice><contentId>ExtDisplay.Keep</contentId></choice>
+      <choice><contentId>ExtDisplay.Hide</contentId></choice>
+      <choice><contentId>ExtDisplay.Disable</contentId></choice>
     </one_choice>
     <toggle id=""tg_l1pcf"" width=""25%"">
       <contentId>ExtDisplay.PCFac</contentId>
     </toggle>
-    <slider id=""sl_l1sz"" contentId=""ExtDisplay.Size"" min=""10"" max=""30"" step=""1"" width=""25%""/>
+    <slider id=""sl_l1sz"" min=""10"" max=""30"" step=""1"" width=""25%""/>
   </hlayout>
 
-  <text contentId=""ExtDisplay.L.L2""/>
+  <text><contentId>ExtDisplay.L.L2</contentId></text>
   <hlayout>
     <one_choice id=""dd_l2"" type=""dropdown"" width=""50%"">
-      <choice contentId=""ExtDisplay.Keep""/>
-      <choice contentId=""ExtDisplay.Hide""/>
-      <choice contentId=""ExtDisplay.Disable""/>
+      <choice><contentId>ExtDisplay.Keep</contentId></choice>
+      <choice><contentId>ExtDisplay.Hide</contentId></choice>
+      <choice><contentId>ExtDisplay.Disable</contentId></choice>
     </one_choice>
     <toggle id=""tg_l2pcf"" width=""25%"">
       <contentId>ExtDisplay.PCFac</contentId>
     </toggle>
-    <slider id=""sl_l2sz"" contentId=""ExtDisplay.Size"" min=""10"" max=""30"" step=""1"" width=""25%""/>
+    <slider id=""sl_l2sz"" min=""10"" max=""30"" step=""1"" width=""25%""/>
   </hlayout>
 
-  <text contentId=""ExtDisplay.L.L3""/>
+  <text><contentId>ExtDisplay.L.L3</contentId></text>
   <hlayout>
     <one_choice id=""dd_l3"" type=""dropdown"" width=""50%"">
-      <choice contentId=""ExtDisplay.Keep""/>
-      <choice contentId=""ExtDisplay.Hide""/>
-      <choice contentId=""ExtDisplay.Disable""/>
+      <choice><contentId>ExtDisplay.Keep</contentId></choice>
+      <choice><contentId>ExtDisplay.Hide</contentId></choice>
+      <choice><contentId>ExtDisplay.Disable</contentId></choice>
     </one_choice>
     <toggle id=""tg_l3pcf"" width=""25%"">
       <contentId>ExtDisplay.PCFac</contentId>
     </toggle>
-    <slider id=""sl_l3sz"" contentId=""ExtDisplay.Size"" min=""10"" max=""30"" step=""1"" width=""25%""/>
+    <slider id=""sl_l3sz"" min=""10"" max=""30"" step=""1"" width=""25%""/>
   </hlayout>
 
-  <text contentId=""ExtDisplay.L.L4""/>
+  <text><contentId>ExtDisplay.L.L4</contentId></text>
   <hlayout>
     <one_choice id=""dd_l4"" type=""dropdown"" width=""50%"">
-      <choice contentId=""ExtDisplay.Keep""/>
-      <choice contentId=""ExtDisplay.Hide""/>
-      <choice contentId=""ExtDisplay.Disable""/>
+      <choice><contentId>ExtDisplay.Keep</contentId></choice>
+      <choice><contentId>ExtDisplay.Hide</contentId></choice>
+      <choice><contentId>ExtDisplay.Disable</contentId></choice>
     </one_choice>
     <toggle id=""tg_l4pcf"" width=""25%"">
       <contentId>ExtDisplay.PCFac</contentId>
     </toggle>
-    <slider id=""sl_l4sz"" contentId=""ExtDisplay.Size"" min=""10"" max=""30"" step=""1"" width=""25%""/>
+    <slider id=""sl_l4sz"" min=""10"" max=""30"" step=""1"" width=""25%""/>
   </hlayout>
 
-  <text contentId=""ExtDisplay.L.Res""/>
+  <text><contentId>ExtDisplay.L.Res</contentId></text>
   <hlayout>
     <one_choice id=""dd_lRes"" type=""dropdown"" width=""50%"">
-      <choice contentId=""ExtDisplay.Keep""/>
-      <choice contentId=""ExtDisplay.Hide""/>
-      <choice contentId=""ExtDisplay.Disable""/>
+      <choice><contentId>ExtDisplay.Keep</contentId></choice>
+      <choice><contentId>ExtDisplay.Hide</contentId></choice>
+      <choice><contentId>ExtDisplay.Disable</contentId></choice>
     </one_choice>
     <toggle id=""tg_lRespcf"" width=""25%"">
       <contentId>ExtDisplay.PCFac</contentId>
     </toggle>
-    <slider id=""sl_lRessz"" contentId=""ExtDisplay.Size"" min=""10"" max=""30"" step=""1"" width=""25%""/>
+    <slider id=""sl_lRessz"" min=""10"" max=""30"" step=""1"" width=""25%""/>
   </hlayout>
 
-  <text contentId=""ExtDisplay.L.Att""/>
+  <text><contentId>ExtDisplay.L.Att</contentId></text>
   <hlayout>
     <one_choice id=""dd_lAtt"" type=""dropdown"" width=""50%"">
-      <choice contentId=""ExtDisplay.Keep""/>
-      <choice contentId=""ExtDisplay.Hide""/>
-      <choice contentId=""ExtDisplay.Disable""/>
+      <choice><contentId>ExtDisplay.Keep</contentId></choice>
+      <choice><contentId>ExtDisplay.Hide</contentId></choice>
+      <choice><contentId>ExtDisplay.Disable</contentId></choice>
     </one_choice>
     <toggle id=""tg_lAttpcf"" width=""25%"">
       <contentId>ExtDisplay.PCFac</contentId>
     </toggle>
-    <slider id=""sl_lAttsz"" contentId=""ExtDisplay.Size"" min=""10"" max=""30"" step=""1"" width=""25%""/>
+    <slider id=""sl_lAttsz"" min=""10"" max=""30"" step=""1"" width=""25%""/>
   </hlayout>
 
-  <text contentId=""ExtDisplay.L.Fav""/>
+  <text><contentId>ExtDisplay.L.Fav</contentId></text>
   <hlayout>
     <one_choice id=""dd_lFav"" type=""dropdown"" width=""50%"">
-      <choice contentId=""ExtDisplay.Keep""/>
-      <choice contentId=""ExtDisplay.Hide""/>
-      <choice contentId=""ExtDisplay.Disable""/>
+      <choice><contentId>ExtDisplay.Keep</contentId></choice>
+      <choice><contentId>ExtDisplay.Hide</contentId></choice>
+      <choice><contentId>ExtDisplay.Disable</contentId></choice>
     </one_choice>
     <toggle id=""tg_lFavpcf"" width=""25%"">
       <contentId>ExtDisplay.PCFac</contentId>
     </toggle>
-    <slider id=""sl_lFavsz"" contentId=""ExtDisplay.Size"" min=""10"" max=""30"" step=""1"" width=""25%""/>
+    <slider id=""sl_lFavsz"" min=""10"" max=""30"" step=""1"" width=""25%""/>
   </hlayout>
 
-  <text contentId=""ExtDisplay.L.Act""/>
+  <text><contentId>ExtDisplay.L.Act</contentId></text>
   <hlayout>
     <one_choice id=""dd_lAct"" type=""dropdown"" width=""40%"">
-      <choice contentId=""ExtDisplay.Keep""/>
-      <choice contentId=""ExtDisplay.Hide""/>
-      <choice contentId=""ExtDisplay.Disable""/>
+      <choice><contentId>ExtDisplay.Keep</contentId></choice>
+      <choice><contentId>ExtDisplay.Hide</contentId></choice>
+      <choice><contentId>ExtDisplay.Disable</contentId></choice>
     </one_choice>
     <toggle id=""tg_lActpcf"" width=""20%"">
       <contentId>ExtDisplay.PCFac</contentId>
     </toggle>
-    <slider id=""sl_lActsz"" contentId=""ExtDisplay.Size"" min=""10"" max=""30"" step=""1"" width=""20%""/>
-    <slider id=""sl_lActipl"" contentId=""ExtDisplay.IPL"" min=""0"" max=""20"" step=""1"" width=""20%""/>
+    <slider id=""sl_lActsz"" min=""10"" max=""30"" step=""1"" width=""20%""/>
+    <slider id=""sl_lActipl"" min=""0"" max=""20"" step=""1"" width=""20%""/>
   </hlayout>
 
-  <text contentId=""ExtDisplay.L.Fea""/>
+  <text><contentId>ExtDisplay.L.Fea</contentId></text>
   <hlayout>
     <one_choice id=""dd_lFea"" type=""dropdown"" width=""40%"">
-      <choice contentId=""ExtDisplay.Keep""/>
-      <choice contentId=""ExtDisplay.Hide""/>
-      <choice contentId=""ExtDisplay.Disable""/>
+      <choice><contentId>ExtDisplay.Keep</contentId></choice>
+      <choice><contentId>ExtDisplay.Hide</contentId></choice>
+      <choice><contentId>ExtDisplay.Disable</contentId></choice>
     </one_choice>
     <toggle id=""tg_lFeapcf"" width=""20%"">
       <contentId>ExtDisplay.PCFac</contentId>
     </toggle>
-    <slider id=""sl_lFeasz"" contentId=""ExtDisplay.Size"" min=""10"" max=""30"" step=""1"" width=""20%""/>
-    <slider id=""sl_lFeaipl"" contentId=""ExtDisplay.IPL"" min=""0"" max=""20"" step=""1"" width=""20%""/>
+    <slider id=""sl_lFeasz"" min=""10"" max=""30"" step=""1"" width=""20%""/>
+    <slider id=""sl_lFeaipl"" min=""0"" max=""20"" step=""1"" width=""20%""/>
   </hlayout>
 </config>";
 
@@ -376,41 +381,41 @@ namespace GanExtendDisplay
 
 			BindDDLive(builder, "dd_l1",     CharaSettings.CharaDisplayLine1);
 			BindTGLive(builder, "tg_l1pcf",  CharaSettings.CharaDisplayLine1PCFactionOnly);
-			BindSLLive(builder, "sl_l1sz",   CharaSettings.CharaDisplayLine1Size);
+			BindSLLive(builder, "sl_l1sz",   "ExtDisplay.Size", CharaSettings.CharaDisplayLine1Size);
 
 			BindDDLive(builder, "dd_l2",     CharaSettings.CharaDisplayLine2);
 			BindTGLive(builder, "tg_l2pcf",  CharaSettings.CharaDisplayLine2PCFactionOnly);
-			BindSLLive(builder, "sl_l2sz",   CharaSettings.CharaDisplayLine2Size);
+			BindSLLive(builder, "sl_l2sz",   "ExtDisplay.Size", CharaSettings.CharaDisplayLine2Size);
 
 			BindDDLive(builder, "dd_l3",     CharaSettings.CharaDisplayLine3);
 			BindTGLive(builder, "tg_l3pcf",  CharaSettings.CharaDisplayLine3PCFactionOnly);
-			BindSLLive(builder, "sl_l3sz",   CharaSettings.CharaDisplayLine3Size);
+			BindSLLive(builder, "sl_l3sz",   "ExtDisplay.Size", CharaSettings.CharaDisplayLine3Size);
 
 			BindDDLive(builder, "dd_l4",     CharaSettings.CharaDisplayLine4);
 			BindTGLive(builder, "tg_l4pcf",  CharaSettings.CharaDisplayLine4PCFactionOnly);
-			BindSLLive(builder, "sl_l4sz",   CharaSettings.CharaDisplayLine4Size);
+			BindSLLive(builder, "sl_l4sz",   "ExtDisplay.Size", CharaSettings.CharaDisplayLine4Size);
 
 			BindDDLive(builder, "dd_lRes",   CharaSettings.CharaDisplayLineResist);
 			BindTGLive(builder, "tg_lRespcf",CharaSettings.CharaDisplayLineResistPCFactionOnly);
-			BindSLLive(builder, "sl_lRessz", CharaSettings.CharaDisplayLineResistSize);
+			BindSLLive(builder, "sl_lRessz", "ExtDisplay.Size", CharaSettings.CharaDisplayLineResistSize);
 
 			BindDDLive(builder, "dd_lAtt",   CharaSettings.CharaDisplayLineAttributes);
 			BindTGLive(builder, "tg_lAttpcf",CharaSettings.CharaDisplayLineAttributesPCFactionOnly);
-			BindSLLive(builder, "sl_lAttsz", CharaSettings.CharaDisplayLineAttributesSize);
+			BindSLLive(builder, "sl_lAttsz", "ExtDisplay.Size", CharaSettings.CharaDisplayLineAttributesSize);
 
 			BindDDLive(builder, "dd_lFav",   CharaSettings.CharaDisplayLineFavgift);
 			BindTGLive(builder, "tg_lFavpcf",CharaSettings.CharaDisplayLineFavgiftPCFactionOnly);
-			BindSLLive(builder, "sl_lFavsz", CharaSettings.CharaDisplayLineFavgiftSize);
+			BindSLLive(builder, "sl_lFavsz", "ExtDisplay.Size", CharaSettings.CharaDisplayLineFavgiftSize);
 
 			BindDDLive(builder, "dd_lAct",   CharaSettings.CharaDisplayLineAct);
 			BindTGLive(builder, "tg_lActpcf",CharaSettings.CharaDisplayLineActPCFactionOnly);
-			BindSLLive(builder, "sl_lActsz", CharaSettings.CharaDisplayLineActSize);
-			BindSL(builder,     "sl_lActipl",CharaSettings.CharaDisplayLineActItemsPerLine); // already live
+			BindSLLive(builder, "sl_lActsz", "ExtDisplay.Size", CharaSettings.CharaDisplayLineActSize);
+			BindSL(builder,     "sl_lActipl","ExtDisplay.IPL",  CharaSettings.CharaDisplayLineActItemsPerLine); // already live
 
 			BindDDLive(builder, "dd_lFea",   CharaSettings.CharaDisplayLineFeat);
 			BindTGLive(builder, "tg_lFeapcf",CharaSettings.CharaDisplayLineFeatPCFactionOnly);
-			BindSLLive(builder, "sl_lFeasz", CharaSettings.CharaDisplayLineFeatSize);
-			BindSL(builder,     "sl_lFeaipl",CharaSettings.CharaDisplayLineFeatItemsPerLine); // already live
+			BindSLLive(builder, "sl_lFeasz", "ExtDisplay.Size", CharaSettings.CharaDisplayLineFeatSize);
+			BindSL(builder,     "sl_lFeaipl","ExtDisplay.IPL",  CharaSettings.CharaDisplayLineFeatItemsPerLine); // already live
 		}
 
 		// -------------------------------------------------------------------------
@@ -492,19 +497,21 @@ namespace GanExtendDisplay
 		}
 
 		// Bind slider and re-bake CharaSettings on change
-		private static void BindSLLive(OptionUIBuilder b, string id, ConfigEntry<int> e)
+		private static void BindSLLive(OptionUIBuilder b, string id, string titleId, ConfigEntry<int> e)
 		{
 			var sl = b.GetPreBuild<OptSlider>(id);
 			if (sl == null) return;
+			sl.Title = _controller.Tr(titleId);
 			sl.Value = e.Value;
 			sl.OnValueChanged += v => { e.Value = (int)v; RefreshCharaSettings(); };
 		}
 
 		// Bind slider without rebake (for already-live settings like ItemsPerLine)
-		private static void BindSL(OptionUIBuilder b, string id, ConfigEntry<int> e)
+		private static void BindSL(OptionUIBuilder b, string id, string titleId, ConfigEntry<int> e)
 		{
 			var sl = b.GetPreBuild<OptSlider>(id);
 			if (sl == null) return;
+			sl.Title = _controller.Tr(titleId);
 			sl.Value = e.Value;
 			sl.OnValueChanged += v => e.Value = (int)v;
 		}
