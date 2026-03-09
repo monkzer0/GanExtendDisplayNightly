@@ -31,17 +31,15 @@ namespace GanExtendDisplay
 			__result = CharaDisplayClass.Chara_GetHoverText_Postfix(__instance, __result);
 		}
 
-		[HarmonyPrefix]
+		[HarmonyPostfix]
 		[HarmonyPatch(typeof(Chara), nameof(Chara.GetHoverText2))]
-		public static bool Chara_GetHoverText2_Prefix(Chara __instance, ref string __result) {
-			if (!Main.ModEnable) { return true; }
-			if (!CharaDisplayConfig.CheckStatus) { return true; }
+		public static void Chara_GetHoverText2_Postfix(Chara __instance, ref string __result) {
+			if (!Main.ModEnable) { return; }
+			if (!CharaDisplayConfig.CheckStatus) { return; }
 			try {
-				__result = CharaDisplayClass.Chara_GetHoverText2_Prefix(__instance, __result);
-				return false;
+				__result += CharaDisplayClass.Chara_GetHoverText2_Additions(__instance);
 			} catch (Exception e) {
 				Main.Logger.LogError($"[ExtendDisplay] GetHoverText2 threw: {e}");
-				return true;
 			}
 		}
 

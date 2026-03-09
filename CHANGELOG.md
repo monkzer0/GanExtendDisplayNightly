@@ -4,17 +4,30 @@ Developer-focused record of all changes from the original [GanExtendDisplay](htt
 
 ---
 
-## [fork] — Hotfix: GetHoverText2 prefix crashing on EA 23.284
+## [fork] — EA 23.284 compatibility: GetHoverText2 patch restructured
 
-### Fixed — `MainExtendDisplay.cs`
+### Changed — `MainExtendDisplay.cs`
 
-**`Chara_GetHoverText2_Prefix` throwing an unhandled exception on every hover frame**
+**`GetHoverText2` changed from a prefix-replace to a postfix**
 
-The `GetHoverText2` Harmony prefix replaces the original method entirely (returns `false`). When the prefix body threw a runtime exception — caused by a game API change in EA 23.284 — the original method was also prevented from running, because Harmony does not execute the original when the prefix has already returned `false`. This produced the observed symptoms: per-frame screen flicker, no tooltip text displayed, and the right-click "Talk" option missing (the original `GetHoverText2` drives that context menu).
+The original patch used `[HarmonyPrefix]` returning `false`, which completely replaced the game's `GetHoverText2` method. This architecture has two failure modes:
 
-The prefix body is now wrapped in a try/catch. On exception the error is logged to `BepInEx\LogOutput.log` (tag `[ExtendDisplay] GetHoverText2 threw: ...`) and the prefix returns `true`, allowing the original method to run. This restores baseline game behaviour while the specific 23.284 API change is identified from the log.
+1. **Runtime exception in our body** — Harmony skips the original because the prefix already signalled "don't run it", so the original's side effects (Talk context menu population, favgift display, conditions, whip-works text) are also lost. This produced the EA 23.284 symptoms: per-frame flicker, blank tooltip, and missing right-click Talk option.
 
-The extended tooltip content (conditions with colour coding, acts, feats) will not appear while the underlying mismatch is unresolved, but the game is playable.
+2. **Future side-effect drift** — any new logic Noa adds to `GetHoverText2` is silently suppressed as long as our prefix returns `false`, even when our code is exception-free.
+
+The patch is now `[HarmonyPostfix]` (`void`, no return value). The original runs unconditionally first; our postfix then appends. Any exception in our postfix is caught and logged to `BepInEx\LogOutput.log` (tag `[ExtendDisplay] GetHoverText2 threw: ...`) but does not affect game functionality.
+
+### Changed — `CharaDisplayClass.cs`
+
+**`Chara_GetHoverText2_Prefix` renamed to `Chara_GetHoverText2_Additions` and stripped to unique content only**
+
+The old implementation re-implemented everything the original `GetHoverText2` does (favgift line, conditions list, debug text, whip-works text) and added acts + feats on top. With the postfix approach the original handles everything it always has; our method returns only what it uniquely contributes:
+
+- **Acts line** — active combat abilities, with optional per-line item wrapping
+- **Feats line** — passive traits/talents in a distinct colour, independently toggled
+
+Favgift, conditions (including the colour-coded and area-debuff-fallback display), debug text, and whip-works text are no longer reimplemented in our code. The original's output for these is preserved unmodified.
 
 ---
 
