@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -83,59 +84,37 @@ namespace GanExtendDisplay
 			return __result;
 		}
 
-		public static string Chara_GetHoverText2_Prefix(Chara __instance, string __result) {
-			string text = "";
-			if (__instance.knowFav || (CharaSettings.CharaDisplayLineFavgiftSettings.CharaDisplayLineOut && (!CharaSettings.CharaDisplayLineAttributesSettings.CharaDisplayPCFactionOnly || __instance.IsPCFaction))) {
-				text += Environment.NewLine;
-				text = text + $"<size={CharaSettings.CharaDisplayLineFavgiftSettings.Size}>" + "favgift".lang(__instance.GetFavCat().GetName().ToLower(), __instance.GetFavFood().GetName()) + "</size>";
-			}
+		// Appended after the original GetHoverText2 output — adds content the original does not
+		// produce or produces in a less informative form.
+		//
+		// Conditions: the original writes basic conditions (name + numeric value). This method
+		// replaces that section with an enhanced version that adds colour-coding by group
+		// (Buff/Debuff/Disease), an area-debuff name fallback when GetPhaseStr() == "#", and
+		// resistCon display. Before appending our enhanced output, the original's basic conditions
+		// lines are stripped from originalResult via a regex so they are not shown twice.
+		//
+		// Acts / Feats: unique additions that the original never generates; appended as-is.
+		public static string Chara_GetHoverText2_Additions(Chara __instance, ref string originalResult) {
+			string result = "";
 
-			string text2 = "";
-			if (EClass.debug.showExtra) {
-				text2 += Environment.NewLine;
-				//text2 = text2 + "Lv:" + __instance.LV + "  HP:" + __instance.hp + "/" + __instance.MaxHP + "  MP:" + __instance.mana.value + "/" + __instance.mana.max + "  DV:" + __instance.DV + "  PV:" + __instance.PV + "  Hunger:" + __instance.hunger.value;
-				text2 += Environment.NewLine;
-				text2 = text2 + "Global:" + __instance.IsGlobal + "  AI:" + __instance.ai?.ToString() + " " + __instance.source.tactics.IsEmpty(EClass.sources.tactics.map.TryGetValue(__instance.id)?.id ?? EClass.sources.tactics.map.TryGetValue(__instance.job.id)?.id ?? "predator");
-				text2 += Environment.NewLine;
-				text2 = text2 + __instance.uid + __instance.IsMinion + "/" + __instance.c_uidMaster + "/" + __instance.master;
-				text2 = text2 + " dir:" + __instance.dir + " skin:" + __instance.idSkin;
-			}
-
-			if (EClass.pc.held?.trait is TraitWhipLove && __instance.IsPCFaction) {
-				text2 += Environment.NewLine;
-				text2 += "<size=14>";
-				foreach (Hobby item in __instance.ListWorks()) {
-					text2 = text2 + item.Name + ", ";
-				}
-
-				foreach (Hobby item2 in __instance.ListHobbies()) {
-					text2 = text2 + item2.Name + ", ";
-				}
-
-				text2 = text2.TrimEnd(", ".ToCharArray()) + "</size>";
-			}
-
-			string text3 = "";
-			IEnumerable<BaseStats> enumerable = __instance.conditions.Concat((!__instance.IsPCFaction) ? new BaseStats[0] : new BaseStats[2] { __instance.hunger, __instance.stamina });
-			if (enumerable.Count() > 0) {
-				text3 += Environment.NewLine;
-				text3 += "<size=14>";
-				int num = 0;
-				foreach (BaseStats item3 in enumerable) {
-					string text4 = item3.GetPhaseStr();
-					if (text4.IsEmpty()) {
-						continue;
+			// Enhanced conditions — colour-coded by group, area-debuff fallback, resistCon
+			// Wrapped in try-catch: if this section throws, the original's basic conditions
+			// remain in place and acts/feats still render below.
+			try {
+				IEnumerable<BaseStats> condSources = __instance.conditions.Concat(
+					(!__instance.IsPCFaction) ? new BaseStats[0] : new BaseStats[2] { __instance.hunger, __instance.stamina }
+				);
+				int condCount = 0;
+				string condText = "<size=14>";
+				foreach (BaseStats item in condSources) {
+					string text = item.GetPhaseStr();
+					if (text.IsEmpty()) { continue; }
+					if (text == "#") {
+						text = item.source.GetName();
+						if (text.IsEmpty()) { continue; }
 					}
-					if (text4 == "#") {
-						// Area debuffs (e.g. 鈍足の魔法 -60) have no phase text; fall back to source name
-						text4 = item3.source.GetName();
-						if (text4.IsEmpty()) {
-							continue;
-						}
-					}
-
 					Color c = Color.white;
-					switch (item3.source.group) {
+					switch (item.source.group) {
 						case "Bad":
 						case "Debuff":
 						case "Disease":
@@ -145,45 +124,51 @@ namespace GanExtendDisplay
 							c = EClass.Colors.colorBuff;
 							break;
 					}
-
-
-					text4 = text4 + "(" + item3.GetValue() + ")";
-					if (__instance.resistCon != null && __instance.resistCon.ContainsKey(item3.id)) {
-						text4 = text4 + "{" + __instance.resistCon[item3.id] + "}";
+					text = text + "(" + item.GetValue() + ")";
+					if (__instance.resistCon != null && __instance.resistCon.ContainsKey(item.id)) {
+						text = text + "{" + __instance.resistCon[item.id] + "}";
 					}
-				
-
-					num++;
-					text3 = text3 + text4.TagColor(c) + ", ";
+					condText += text.TagColor(c) + ", ";
+					condCount++;
 				}
-
-				if (num == 0) {
-					text3 = "";
-				} else {
-					text = "";
-					text3 = text3.TrimEnd(", ".ToCharArray()) + "</size>";
+				if (condCount > 0) {
+					condText = condText.TrimEnd().TrimEnd(',');
+					condText += "</size>";
+					// Strip the original's basic conditions lines to prevent double-display.
+					// The original renders each condition as: \n<size=N>text(value)</size>
+					// We match any such line that contains a parenthesised number.
+					originalResult = Regex.Replace(
+						originalResult,
+						@"\n<size=\d+>[^<]*\(\d+\)[^<]*</size>",
+						"",
+						RegexOptions.None
+					);
+					result += Environment.NewLine + condText;
 				}
+			} catch (Exception condEx) {
+				Main.Logger.LogWarning($"[ExtendDisplay] conditions block threw: {condEx.Message}");
+				// original's basic conditions remain; no enhanced section appended
 			}
 
 			if (CharaSettings.CharaDisplayLineActSettings.CharaDisplayLineOut && (!CharaSettings.CharaDisplayLineActSettings.CharaDisplayPCFactionOnly || __instance.IsPCFaction)) {
-				text3 += Environment.NewLine;
+				result += Environment.NewLine;
 				int actItemsPerLine = CharaSettings.CharaDisplayLineActItemsPerLine.Value;
 				int actCount = 0;
-				foreach (ActList.Item item4 in __instance.ability.list.items) {
+				foreach (ActList.Item item in __instance.ability.list.items) {
 					if (actItemsPerLine > 0 && actCount > 0 && actCount % actItemsPerLine == 0) {
-						text3 += Environment.NewLine;
+						result += Environment.NewLine;
 					}
 					string aliasParentName = null;
-					if (!string.IsNullOrWhiteSpace(item4.act.source.aliasParent)) {
-						string aliasParentElement = Element.GetName(item4.act.source.aliasParent);
+					if (!string.IsNullOrWhiteSpace(item.act.source.aliasParent)) {
+						string aliasParentElement = Element.GetName(item.act.source.aliasParent);
 						if (aliasParentElement != null) {
 							aliasParentName = "(" + aliasParentElement + ")";
 						}
 					}
-					text3 = text3 + (item4.act.Name + aliasParentName + ", ").TagSize(CharaSettings.CharaDisplayLineActSettings.Size);
+					result += (item.act.Name + aliasParentName + ", ").TagSize(CharaSettings.CharaDisplayLineActSettings.Size);
 					actCount++;
 				}
-				text3 = text3.TrimEnd(" ".ToCharArray()).TrimEnd(",".ToCharArray());
+				result = result.TrimEnd(" ".ToCharArray()).TrimEnd(",".ToCharArray());
 			}
 
 			// Feat line — displayed separately from acts so each can be toggled independently
@@ -192,21 +177,21 @@ namespace GanExtendDisplay
 			if (CharaSettings.CharaDisplayLineFeatSettings.CharaDisplayLineOut && (!CharaSettings.CharaDisplayLineFeatSettings.CharaDisplayPCFactionOnly || __instance.IsPCFaction)) {
 				var feats = __instance.elements.ListElements(x => x.source.category == "feat" && x.Value > 0);
 				if (feats != null && feats.Any()) {
-					text3 += Environment.NewLine;
+					result += Environment.NewLine;
 					int featItemsPerLine = CharaSettings.CharaDisplayLineFeatItemsPerLine.Value;
 					int featCount = 0;
 					foreach (Element feat in feats) {
 						if (featItemsPerLine > 0 && featCount > 0 && featCount % featItemsPerLine == 0) {
-							text3 += Environment.NewLine;
+							result += Environment.NewLine;
 						}
-						text3 = text3 + (feat.Name + ", ").TagColor(EClass.Colors.colorBuff).TagSize(CharaSettings.CharaDisplayLineFeatSettings.Size);
+						result += (feat.Name + ", ").TagColor(EClass.Colors.colorBuff).TagSize(CharaSettings.CharaDisplayLineFeatSettings.Size);
 						featCount++;
 					}
-					text3 = text3.TrimEnd(" ".ToCharArray()).TrimEnd(",".ToCharArray());
+					result = result.TrimEnd(" ".ToCharArray()).TrimEnd(",".ToCharArray());
 				}
 			}
 
-			return text + text2 + text3;
+			return result;
 		}
 
 	}

@@ -4,6 +4,34 @@ Developer-focused record of all changes from the original [GanExtendDisplay](htt
 
 ---
 
+## [fork] — EA 23.284 compatibility: GetHoverText2 patch restructured
+
+### Changed — `MainExtendDisplay.cs`
+
+**`GetHoverText2` changed from a prefix-replace to a postfix**
+
+The original patch used `[HarmonyPrefix]` returning `false`, which completely replaced the game's `GetHoverText2` method. This architecture has two failure modes:
+
+1. **Runtime exception in our body** — Harmony skips the original because the prefix already signalled "don't run it", so the original's side effects (Talk context menu population, favgift display, conditions, whip-works text) are also lost. This produced the EA 23.284 symptoms: per-frame flicker, blank tooltip, and missing right-click Talk option.
+
+2. **Future side-effect drift** — any new logic Noa adds to `GetHoverText2` is silently suppressed as long as our prefix returns `false`, even when our code is exception-free.
+
+The patch is now `[HarmonyPostfix]` (`void`, no return value). The original runs unconditionally first; our postfix then appends. Any exception in our postfix is caught and logged to `BepInEx\LogOutput.log` (tag `[ExtendDisplay] GetHoverText2 threw: ...`) but does not affect game functionality.
+
+### Changed — `CharaDisplayClass.cs`
+
+**`Chara_GetHoverText2_Prefix` renamed to `Chara_GetHoverText2_Additions`; conditions section restored with replacement strategy**
+
+With the postfix approach the original runs first and writes its own output. `Chara_GetHoverText2_Additions` then appends what it uniquely contributes:
+
+- **Enhanced conditions line** — re-implemented with colour-coding by group (`Bad`/`Debuff`/`Disease` → `colorDebuff`; `Buff` → `colorBuff`; otherwise white), area-debuff name fallback (`GetPhaseStr() == "#"` → `item.source.GetName()`), and `resistCon` value display. To avoid showing conditions twice, the original's basic conditions lines are stripped from `originalResult` via a regex (`\n<size=\d+>[^<]*\(\d+\)[^<]*</size>`) before the enhanced version is appended. The conditions block is wrapped in a separate try-catch: if it throws, the original's basic output remains in place and acts/feats continue to render.
+- **Acts line** — active combat abilities, with optional per-line item wrapping
+- **Feats line** — passive traits/talents in a distinct colour, independently toggled
+
+Favgift, debug text, and whip-works text are handled by the original and are not reimplemented here. Method signature updated to `(Chara __instance, ref string originalResult)` to allow the conditions block to mutate the accumulated result before appending.
+
+---
+
 ## [fork] — Bugfix: bare number shown in vampire status widget
 
 ### Fixed — `MainExtendDisplay.cs`
