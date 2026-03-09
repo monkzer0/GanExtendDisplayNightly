@@ -20,14 +20,15 @@ The patch is now `[HarmonyPostfix]` (`void`, no return value). The original runs
 
 ### Changed — `CharaDisplayClass.cs`
 
-**`Chara_GetHoverText2_Prefix` renamed to `Chara_GetHoverText2_Additions` and stripped to unique content only**
+**`Chara_GetHoverText2_Prefix` renamed to `Chara_GetHoverText2_Additions`; conditions section restored with replacement strategy**
 
-The old implementation re-implemented everything the original `GetHoverText2` does (favgift line, conditions list, debug text, whip-works text) and added acts + feats on top. With the postfix approach the original handles everything it always has; our method returns only what it uniquely contributes:
+With the postfix approach the original runs first and writes its own output. `Chara_GetHoverText2_Additions` then appends what it uniquely contributes:
 
+- **Enhanced conditions line** — re-implemented with colour-coding by group (`Bad`/`Debuff`/`Disease` → `colorDebuff`; `Buff` → `colorBuff`; otherwise white), area-debuff name fallback (`GetPhaseStr() == "#"` → `item.source.GetName()`), and `resistCon` value display. To avoid showing conditions twice, the original's basic conditions lines are stripped from `originalResult` via a regex (`\n<size=\d+>[^<]*\(\d+\)[^<]*</size>`) before the enhanced version is appended. The conditions block is wrapped in a separate try-catch: if it throws, the original's basic output remains in place and acts/feats continue to render.
 - **Acts line** — active combat abilities, with optional per-line item wrapping
 - **Feats line** — passive traits/talents in a distinct colour, independently toggled
 
-Favgift, conditions (including the colour-coded and area-debuff-fallback display), debug text, and whip-works text are no longer reimplemented in our code. The original's output for these is preserved unmodified.
+Favgift, debug text, and whip-works text are handled by the original and are not reimplemented here. Method signature updated to `(Chara __instance, ref string originalResult)` to allow the conditions block to mutate the accumulated result before appending.
 
 ---
 

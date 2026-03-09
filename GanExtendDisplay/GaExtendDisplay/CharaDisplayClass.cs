@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -83,11 +84,71 @@ namespace GanExtendDisplay
 			return __result;
 		}
 
-		// Appended after the original GetHoverText2 output — adds only content the original does
-		// not produce (acts line, feats line). Favgift, conditions, debug, and whip-works text
-		// are handled by the original and intentionally not reimplemented here.
-		public static string Chara_GetHoverText2_Additions(Chara __instance) {
+		// Appended after the original GetHoverText2 output — adds content the original does not
+		// produce or produces in a less informative form.
+		//
+		// Conditions: the original writes basic conditions (name + numeric value). This method
+		// replaces that section with an enhanced version that adds colour-coding by group
+		// (Buff/Debuff/Disease), an area-debuff name fallback when GetPhaseStr() == "#", and
+		// resistCon display. Before appending our enhanced output, the original's basic conditions
+		// lines are stripped from originalResult via a regex so they are not shown twice.
+		//
+		// Acts / Feats: unique additions that the original never generates; appended as-is.
+		public static string Chara_GetHoverText2_Additions(Chara __instance, ref string originalResult) {
 			string result = "";
+
+			// Enhanced conditions — colour-coded by group, area-debuff fallback, resistCon
+			// Wrapped in try-catch: if this section throws, the original's basic conditions
+			// remain in place and acts/feats still render below.
+			try {
+				IEnumerable<BaseStats> condSources = __instance.conditions.Concat(
+					(!__instance.IsPCFaction) ? new BaseStats[0] : new BaseStats[2] { __instance.hunger, __instance.stamina }
+				);
+				int condCount = 0;
+				string condText = "<size=14>";
+				foreach (BaseStats item in condSources) {
+					string text = item.GetPhaseStr();
+					if (text.IsEmpty()) { continue; }
+					if (text == "#") {
+						text = item.source.GetName();
+						if (text.IsEmpty()) { continue; }
+					}
+					Color c = Color.white;
+					switch (item.source.group) {
+						case "Bad":
+						case "Debuff":
+						case "Disease":
+							c = EClass.Colors.colorDebuff;
+							break;
+						case "Buff":
+							c = EClass.Colors.colorBuff;
+							break;
+					}
+					text = text + "(" + item.GetValue() + ")";
+					if (__instance.resistCon != null && __instance.resistCon.ContainsKey(item.id)) {
+						text = text + "{" + __instance.resistCon[item.id] + "}";
+					}
+					condText += text.TagColor(c) + ", ";
+					condCount++;
+				}
+				if (condCount > 0) {
+					condText = condText.TrimEnd().TrimEnd(',');
+					condText += "</size>";
+					// Strip the original's basic conditions lines to prevent double-display.
+					// The original renders each condition as: \n<size=N>text(value)</size>
+					// We match any such line that contains a parenthesised number.
+					originalResult = Regex.Replace(
+						originalResult,
+						@"\n<size=\d+>[^<]*\(\d+\)[^<]*</size>",
+						"",
+						RegexOptions.None
+					);
+					result += Environment.NewLine + condText;
+				}
+			} catch (Exception condEx) {
+				Main.Logger.LogWarning($"[ExtendDisplay] conditions block threw: {condEx.Message}");
+				// original's basic conditions remain; no enhanced section appended
+			}
 
 			if (CharaSettings.CharaDisplayLineActSettings.CharaDisplayLineOut && (!CharaSettings.CharaDisplayLineActSettings.CharaDisplayPCFactionOnly || __instance.IsPCFaction)) {
 				result += Environment.NewLine;

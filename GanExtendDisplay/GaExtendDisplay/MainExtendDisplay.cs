@@ -37,7 +37,7 @@ namespace GanExtendDisplay
 			if (!Main.ModEnable) { return; }
 			if (!CharaDisplayConfig.CheckStatus) { return; }
 			try {
-				__result += CharaDisplayClass.Chara_GetHoverText2_Additions(__instance);
+				__result += CharaDisplayClass.Chara_GetHoverText2_Additions(__instance, ref __result);
 			} catch (Exception e) {
 				Main.Logger.LogError($"[ExtendDisplay] GetHoverText2 threw: {e}");
 			}
