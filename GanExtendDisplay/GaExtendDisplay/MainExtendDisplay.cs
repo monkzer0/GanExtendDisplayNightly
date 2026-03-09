@@ -15,7 +15,7 @@ namespace GanExtendDisplay
 
 	public class CharaDisplay
 	{
-		/* 
+		/*
 		角色显示
 		*/
 
@@ -36,8 +36,13 @@ namespace GanExtendDisplay
 		public static bool Chara_GetHoverText2_Prefix(Chara __instance, ref string __result) {
 			if (!Main.ModEnable) { return true; }
 			if (!CharaDisplayConfig.CheckStatus) { return true; }
-			__result = CharaDisplayClass.Chara_GetHoverText2_Prefix(__instance, __result);
-			return false;
+			try {
+				__result = CharaDisplayClass.Chara_GetHoverText2_Prefix(__instance, __result);
+				return false;
+			} catch (Exception e) {
+				Main.Logger.LogError($"[ExtendDisplay] GetHoverText2 threw: {e}");
+				return true;
+			}
 		}
 
 

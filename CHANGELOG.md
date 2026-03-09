@@ -4,6 +4,20 @@ Developer-focused record of all changes from the original [GanExtendDisplay](htt
 
 ---
 
+## [fork] — Hotfix: GetHoverText2 prefix crashing on EA 23.284
+
+### Fixed — `MainExtendDisplay.cs`
+
+**`Chara_GetHoverText2_Prefix` throwing an unhandled exception on every hover frame**
+
+The `GetHoverText2` Harmony prefix replaces the original method entirely (returns `false`). When the prefix body threw a runtime exception — caused by a game API change in EA 23.284 — the original method was also prevented from running, because Harmony does not execute the original when the prefix has already returned `false`. This produced the observed symptoms: per-frame screen flicker, no tooltip text displayed, and the right-click "Talk" option missing (the original `GetHoverText2` drives that context menu).
+
+The prefix body is now wrapped in a try/catch. On exception the error is logged to `BepInEx\LogOutput.log` (tag `[ExtendDisplay] GetHoverText2 threw: ...`) and the prefix returns `true`, allowing the original method to run. This restores baseline game behaviour while the specific 23.284 API change is identified from the log.
+
+The extended tooltip content (conditions with colour coding, acts, feats) will not appear while the underlying mismatch is unresolved, but the game is playable.
+
+---
+
 ## [fork] — Bugfix: bare number shown in vampire status widget
 
 ### Fixed — `MainExtendDisplay.cs`
