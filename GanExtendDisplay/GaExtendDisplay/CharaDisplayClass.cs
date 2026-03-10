@@ -97,32 +97,6 @@ namespace GanExtendDisplay
 		public static string Chara_GetHoverText2_Additions(Chara __instance, string originalResult) {
 			string result = originalResult;
 
-			// DEBUG: log originalResult when knowFav=true so we can see the game's exact format
-			if (__instance.knowFav && __instance.conditions.Count > 0) {
-				Main.Logger.LogInfo("[ExtendDisplay DEBUG] originalResult (escaped): " +
-					originalResult.Replace("\r", "\\r").Replace("\n", "\\n").Replace("\t", "\\t"));
-			}
-
-			// If knowFav is true the game already appended a favgift line to originalResult.
-			// Save that line now so we can restore it if the conditions-stripping below
-			// accidentally removes it (the game's output order is not guaranteed).
-			string savedFavgiftLine = null;
-			if (__instance.knowFav) {
-				try {
-					string favKey = "favgift".lang(__instance.GetFavCat().GetName().ToLower(), __instance.GetFavFood().GetName());
-					if (!favKey.IsEmpty()) {
-						int favIdx = result.IndexOf(favKey);
-						if (favIdx >= 0) {
-							int ls = result.LastIndexOf('\n', favIdx);
-							ls = ls >= 0 ? ls : 0;
-							int le = result.IndexOf('\n', favIdx + favKey.Length);
-							le = le >= 0 ? le : result.Length;
-							savedFavgiftLine = result.Substring(ls, le - ls);
-						}
-					}
-				} catch { }
-			}
-
 			// Enhanced conditions — colour-coded by group, area-debuff fallback, resistCon
 			// Wrapped in try-catch: if this section throws, the original's basic conditions
 			// remain in place and acts/feats still render below.
@@ -162,38 +136,30 @@ namespace GanExtendDisplay
 				if (condCount > 0) {
 					condText = condText.TrimEnd().TrimEnd(',');
 					condText += "</size>";
-					// Remove the original's conditions block by splicing out exactly
-					// [condLineStart, condLineEnd) so any content the game placed
-					// on the conditions line is removed without touching other lines.
-					int condLineStart = result.Length; // sentinel: "not found"
-					int condLineEnd = 0;               // sentinel: "not found"
-					foreach (string ph in rawPhaseTexts) {
-						int idx = result.LastIndexOf(ph);
-						if (idx < 0) continue;
-						int nl = result.LastIndexOf('\n', idx);
-						int lineStart = nl >= 0 ? nl : 0;
-						if (lineStart < condLineStart) condLineStart = lineStart;
-						int nlAfter = result.IndexOf('\n', idx + ph.Length);
-						int lineEnd = nlAfter >= 0 ? nlAfter : result.Length;
-						if (lineEnd > condLineEnd) condLineEnd = lineEnd;
+					// Replace the game's plain conditions line with our enhanced version.
+					// The game outputs: \r\n<size=14><color=#FFFFFF>Cond1</color>, ...</size>
+					// Replace the whole originalResult (which is just that one line) with our version.
+					result = Environment.NewLine + condText;
+					// The game omits favgift from GetHoverText2 when conditions are present
+					// (confirmed by log: originalResult contains only the conditions line).
+					// Re-add it here so it is not lost.
+					if (__instance.knowFav) {
+						try {
+							string favLine = "favgift".lang(__instance.GetFavCat().GetName().ToLower(), __instance.GetFavFood().GetName());
+							if (!favLine.IsEmpty()) {
+								int sz = (CharaSettings.CharaDisplayLineFavgiftSettings != null) ? CharaSettings.CharaDisplayLineFavgiftSettings.Size : 14;
+								result += Environment.NewLine + "<size=" + sz + ">" + favLine + "</size>";
+							}
+						} catch { }
 					}
-					if (condLineStart < result.Length && condLineEnd > condLineStart) {
-						result = result.Substring(0, condLineStart) + result.Substring(condLineEnd);
-					}
-					result += Environment.NewLine + condText;
 				}
 			} catch (Exception condEx) {
 				Main.Logger.LogWarning($"[ExtendDisplay] conditions block threw: {condEx.Message}");
 				// original's basic conditions remain; no enhanced section appended
 			}
 
-			// Restore favgift if the conditions stripping removed it.
-			if (savedFavgiftLine != null && !result.Contains(savedFavgiftLine)) {
-				result += savedFavgiftLine;
-			}
-
-			// Favgift force-display: the game shows favgift only when knowFav=true.
-			// When the config is set to Show and the player hasn't discovered it yet, add it ourselves.
+			// Favgift force-display: when the player hasn't discovered the favgift yet,
+			// add it ourselves if the setting is enabled.
 			if (!__instance.knowFav &&
 				CharaSettings.CharaDisplayLineFavgiftSettings != null &&
 				CharaSettings.CharaDisplayLineFavgiftSettings.CharaDisplayLineOut &&
