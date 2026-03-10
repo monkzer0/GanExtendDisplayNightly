@@ -161,8 +161,13 @@ namespace GanExtendDisplay
 		public static bool DNA_WriteNote_Prefix(DNA __instance, UINote n, Chara tg) {
 			if (!Main.ModEnable) { return true; }
 			if (!EnchantDisplayConfig.CheckStatus) { return true; }
-			EnchantDisplayClass.DNA_WriteNote_Prefix(__instance, n, tg);
-			return false;
+			try {
+				EnchantDisplayClass.DNA_WriteNote_Prefix(__instance, n, tg);
+				return false;
+			} catch (Exception e) {
+				Main.Logger.LogError($"[ExtendDisplay] DNA.WriteNote threw: {e}");
+				return true;
+			}
 		}
 
 		//显示面板，这里主要修补附魔内容
@@ -171,8 +176,13 @@ namespace GanExtendDisplay
 		public static bool TingInfoShowExtend_AddEncNote_Prefix(Element __instance, UINote n, Card Card, ElementContainer.NoteMode mode = ElementContainer.NoteMode.Default, Func<Element, string, string> funcText = null, Action<UINote, Element> onAddNote = null) {
 			if (!Main.ModEnable) { return true; }
 			if (!EnchantDisplayConfig.CheckStatus) { return true; }
-			EnchantDisplayClass.Enchant_AddEncNote_Prefix(__instance, n, Card, mode, funcText, onAddNote);
-			return false;
+			try {
+				EnchantDisplayClass.Enchant_AddEncNote_Prefix(__instance, n, Card, mode, funcText, onAddNote);
+				return false;
+			} catch (Exception e) {
+				Main.Logger.LogError($"[ExtendDisplay] AddEncNote threw: {e}");
+				return true;
+			}
 		}
 	}
 }
