@@ -94,8 +94,8 @@ namespace GanExtendDisplay
 		// lines are stripped from originalResult via a regex so they are not shown twice.
 		//
 		// Acts / Feats: unique additions that the original never generates; appended as-is.
-		public static string Chara_GetHoverText2_Additions(Chara __instance, ref string originalResult) {
-			string result = "";
+		public static string Chara_GetHoverText2_Additions(Chara __instance, string originalResult) {
+			string result = originalResult;
 
 			// Enhanced conditions — colour-coded by group, area-debuff fallback, resistCon
 			// Wrapped in try-catch: if this section throws, the original's basic conditions
@@ -137,8 +137,8 @@ namespace GanExtendDisplay
 					// Strip the original's basic conditions lines to prevent double-display.
 					// The original renders each condition as: \n<size=N>text(value)</size>
 					// We match any such line that contains a parenthesised number.
-					originalResult = Regex.Replace(
-						originalResult,
+					result = Regex.Replace(
+						result,
 						@"\n<size=\d+>[^<]*\(\d+\)[^<]*</size>",
 						"",
 						RegexOptions.None
