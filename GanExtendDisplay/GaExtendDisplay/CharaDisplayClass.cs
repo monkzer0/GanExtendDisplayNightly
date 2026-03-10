@@ -97,6 +97,12 @@ namespace GanExtendDisplay
 		public static string Chara_GetHoverText2_Additions(Chara __instance, string originalResult) {
 			string result = originalResult;
 
+			// DEBUG: log originalResult when knowFav=true so we can see the game's exact format
+			if (__instance.knowFav && __instance.conditions.Count > 0) {
+				Main.Logger.LogInfo("[ExtendDisplay DEBUG] originalResult (escaped): " +
+					originalResult.Replace("\r", "\\r").Replace("\n", "\\n").Replace("\t", "\\t"));
+			}
+
 			// If knowFav is true the game already appended a favgift line to originalResult.
 			// Save that line now so we can restore it if the conditions-stripping below
 			// accidentally removes it (the game's output order is not guaranteed).
