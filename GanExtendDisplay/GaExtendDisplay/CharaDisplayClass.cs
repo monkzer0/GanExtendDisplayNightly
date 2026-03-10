@@ -136,19 +136,18 @@ namespace GanExtendDisplay
 				if (condCount > 0) {
 					condText = condText.TrimEnd().TrimEnd(',');
 					condText += "</size>";
-					// Strip the original's conditions line. The original renders all active
-					// conditions as a single comma-separated line WITHOUT (values), e.g.
-					// "Taunting, Starving" -- so the previous \(\d+\) pattern never matched.
-					// Match any <size=N> line containing at least one known condition name.
-					if (rawPhaseTexts.Count > 0) {
-						string phaseAlt = string.Join("|", rawPhaseTexts.Select(ph => Regex.Escape(ph)));
-						result = Regex.Replace(
-							result,
-							@"\n<size=\d+>[^<]*(?:" + phaseAlt + @")[^<]*</size>",
-							"",
-							RegexOptions.None
-						);
+					// Remove the original's conditions block.
+					// Conditions are the last thing GetHoverText2 appends, so find the
+					// newline immediately before the earliest condition name and truncate
+					// there. Plain string search -- no assumptions about tag format.
+					int cutAt = result.Length;
+					foreach (string ph in rawPhaseTexts) {
+						int idx = result.LastIndexOf(ph);
+						if (idx < 0) continue;
+						int nl = result.LastIndexOf('\n', idx);
+						if (nl >= 0 && nl < cutAt) cutAt = nl;
 					}
+					if (cutAt < result.Length) result = result.Substring(0, cutAt);
 					result += Environment.NewLine + condText;
 				}
 			} catch (Exception condEx) {
