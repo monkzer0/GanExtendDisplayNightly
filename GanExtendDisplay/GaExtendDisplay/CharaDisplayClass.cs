@@ -136,19 +136,26 @@ namespace GanExtendDisplay
 				if (condCount > 0) {
 					condText = condText.TrimEnd().TrimEnd(',');
 					condText += "</size>";
-					// Remove the original's conditions block.
-					// Conditions are the last thing GetHoverText2 appends, so find the
-					// newline immediately before the earliest condition name and truncate
-					// there. Plain string search -- no assumptions about tag format.
-					int cutAt = result.Length;
+					// Remove the original's conditions block by splicing out exactly
+					// [condLineStart, condLineEnd) so any content that the game placed
+					// AFTER the conditions line (e.g. favgift) is preserved.
+					int condLineStart = result.Length; // sentinel: "not found"
+					int condLineEnd = 0;               // sentinel: "not found"
 					foreach (string ph in rawPhaseTexts) {
 						int idx = result.LastIndexOf(ph);
 						if (idx < 0) continue;
+						// line start: the \n before the condition, or 0 if none
 						int nl = result.LastIndexOf('\n', idx);
-						int cutPos = nl >= 0 ? nl : 0; // no preceding newline = conditions start at position 0
-						if (cutPos < cutAt) cutAt = cutPos;
+						int lineStart = nl >= 0 ? nl : 0;
+						if (lineStart < condLineStart) condLineStart = lineStart;
+						// line end: the \n after the condition, or end of string if none
+						int nlAfter = result.IndexOf('\n', idx + ph.Length);
+						int lineEnd = nlAfter >= 0 ? nlAfter : result.Length;
+						if (lineEnd > condLineEnd) condLineEnd = lineEnd;
 					}
-					if (cutAt < result.Length) result = result.Substring(0, cutAt);
+					if (condLineStart < result.Length && condLineEnd > condLineStart) {
+						result = result.Substring(0, condLineStart) + result.Substring(condLineEnd);
+					}
 					result += Environment.NewLine + condText;
 				}
 			} catch (Exception condEx) {
