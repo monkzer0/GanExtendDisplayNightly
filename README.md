@@ -140,7 +140,7 @@ This fork is uploaded and maintained with permission from the original author.
 
 ---
 
-*Targets the Nightly build of Elin. Provided as-is — it may break when the game updates.*
+*Primarily targets the Nightly build of Elin; tested on stable. Provided as-is — it may break when the game updates.*
 
 ---
 
@@ -279,7 +279,7 @@ This fork is uploaded and maintained with permission from the original author.
 
 ---
 
-*针对 Elin Nightly 版本，按原样提供——游戏更新时可能失效。*
+*主要针对 Elin Nightly 版本，同时兼容稳定版。按原样提供——游戏更新时可能失效。*
 
 ---
 
@@ -427,4 +427,4 @@ Elin Nightly ビルド向けに維持されている、[GanExtendDisplay](https:
 
 ---
 
-*Elin Nightly ビルドを対象としています。現状のまま提供 — ゲームが更新された際に動作しなくなる可能性があります。*
+*主にElin Nightlyビルドを対象としています。安定版でも動作確認済み。現状のまま提供 — ゲームが更新された際に動作しなくなる可能性があります。*
