@@ -156,13 +156,31 @@ namespace GanExtendDisplay
 				// original's basic conditions remain; no enhanced section appended
 			}
 
+			// Favgift force-display: the game shows favgift only when knowFav=true.
+			// When the config is set to Show and the player hasn't discovered it yet, add it ourselves.
+			if (!__instance.knowFav &&
+				CharaSettings.CharaDisplayLineFavgiftSettings != null &&
+				CharaSettings.CharaDisplayLineFavgiftSettings.CharaDisplayLineOut &&
+				(!CharaSettings.CharaDisplayLineFavgiftSettings.CharaDisplayPCFactionOnly || __instance.IsPCFaction)) {
+				try {
+					string favLine = "favgift".lang(__instance.GetFavCat().GetName().ToLower(), __instance.GetFavFood().GetName());
+					if (!favLine.IsEmpty()) {
+						result += Environment.NewLine + $"<size={CharaSettings.CharaDisplayLineFavgiftSettings.Size}>" + favLine + "</size>";
+					}
+				} catch (Exception favEx) {
+					Main.Logger.LogWarning($"[ExtendDisplay] favgift force-display threw: {favEx.Message}");
+				}
+			}
+
 			if (CharaSettings.CharaDisplayLineActSettings.CharaDisplayLineOut && (!CharaSettings.CharaDisplayLineActSettings.CharaDisplayPCFactionOnly || __instance.IsPCFaction)) {
-				result += Environment.NewLine;
+				int actSize = CharaSettings.CharaDisplayLineActSettings.Size;
 				int actItemsPerLine = CharaSettings.CharaDisplayLineActItemsPerLine.Value;
 				int actCount = 0;
+				string actSegment = "";
 				foreach (ActList.Item item in __instance.ability.list.items) {
 					if (actItemsPerLine > 0 && actCount > 0 && actCount % actItemsPerLine == 0) {
-						result += Environment.NewLine;
+						result += Environment.NewLine + actSegment.TrimEnd().TrimEnd(',').TrimEnd().TagSize(actSize);
+						actSegment = "";
 					}
 					string aliasParentName = null;
 					if (!string.IsNullOrWhiteSpace(item.act.source.aliasParent)) {
@@ -171,10 +189,12 @@ namespace GanExtendDisplay
 							aliasParentName = "(" + aliasParentElement + ")";
 						}
 					}
-					result += (item.act.Name + aliasParentName + ", ").TagSize(CharaSettings.CharaDisplayLineActSettings.Size);
+					actSegment += item.act.Name + aliasParentName + ", ";
 					actCount++;
 				}
-				result = result.TrimEnd(" ".ToCharArray()).TrimEnd(",".ToCharArray());
+				if (actCount > 0) {
+					result += Environment.NewLine + actSegment.TrimEnd().TrimEnd(',').TrimEnd().TagSize(actSize);
+				}
 			}
 
 			// Feat line — displayed separately from acts so each can be toggled independently
@@ -183,17 +203,21 @@ namespace GanExtendDisplay
 			if (CharaSettings.CharaDisplayLineFeatSettings.CharaDisplayLineOut && (!CharaSettings.CharaDisplayLineFeatSettings.CharaDisplayPCFactionOnly || __instance.IsPCFaction)) {
 				var feats = __instance.elements.ListElements(x => x.source.category == "feat" && x.Value > 0);
 				if (feats != null && feats.Any()) {
-					result += Environment.NewLine;
+					int featSize = CharaSettings.CharaDisplayLineFeatSettings.Size;
 					int featItemsPerLine = CharaSettings.CharaDisplayLineFeatItemsPerLine.Value;
 					int featCount = 0;
+					string featSegment = "";
 					foreach (Element feat in feats) {
 						if (featItemsPerLine > 0 && featCount > 0 && featCount % featItemsPerLine == 0) {
-							result += Environment.NewLine;
+							result += Environment.NewLine + featSegment.TrimEnd().TrimEnd(',').TrimEnd().TagColor(EClass.Colors.colorBuff).TagSize(featSize);
+							featSegment = "";
 						}
-						result += (feat.Name + ", ").TagColor(EClass.Colors.colorBuff).TagSize(CharaSettings.CharaDisplayLineFeatSettings.Size);
+						featSegment += feat.Name + ", ";
 						featCount++;
 					}
-					result = result.TrimEnd(" ".ToCharArray()).TrimEnd(",".ToCharArray());
+					if (featCount > 0) {
+						result += Environment.NewLine + featSegment.TrimEnd().TrimEnd(',').TrimEnd().TagColor(EClass.Colors.colorBuff).TagSize(featSize);
+					}
 				}
 			}
 
