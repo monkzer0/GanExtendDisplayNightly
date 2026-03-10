@@ -53,7 +53,12 @@ namespace GanExtendDisplay
 				text = text.TagColor(c);
 				__result = $"{text} Lv.{__instance.LV.ToString()} ".TagColor(c) + $"{__instance.material.GetName()} {__result}";
 				string lockLv = (__instance.c_lockLv > 0) ? ($" Lock.Lv.{__instance.c_lockLv.ToString().TagColor(Color.yellow)}") : "";
-				string Scales = $"¤ {__instance.GetPrice(CurrencyType.Money, false, PriceType.Default, null).ToString()}".TagSize(14);
+				string Scales = "";
+				try {
+					Scales = $"¤ {__instance.GetPrice(CurrencyType.Money, false, PriceType.Default, null).ToString()}".TagSize(14);
+				} catch {
+					// GetPrice signature differs between stable and nightly; omit price on stable
+				}
 				__result = $"{__result} {Scales} {lockLv}";
 			}
 			return __result;

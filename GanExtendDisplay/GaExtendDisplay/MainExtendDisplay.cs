@@ -117,7 +117,11 @@ namespace GanExtendDisplay
 		public static void Thing_GetHoverText_Postfix(Thing __instance, ref string __result) {
 			if (!Main.ModEnable) { return; }
 			if (!ThingDisplayConfig.CheckStatus) { return ; }
-			__result = ThingDisplayClass.Thing_GetHoverText_Postfix(__instance, __result);
+			try {
+				__result = ThingDisplayClass.Thing_GetHoverText_Postfix(__instance, __result);
+			} catch (Exception e) {
+				Main.Logger.LogError($"[ExtendDisplay] Thing.GetHoverText threw: {e}");
+			}
 		}
 
 
