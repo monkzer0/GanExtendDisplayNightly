@@ -136,12 +136,15 @@ namespace GanExtendDisplay
 				if (condCount > 0) {
 					condText = condText.TrimEnd().TrimEnd(',');
 					condText += "</size>";
-					// Strip only the original's lines for conditions that are actually active.
-					// Using exact phase texts avoids matching unrelated lines (e.g. favgift).
-					foreach (string ph in rawPhaseTexts) {
+					// Strip the original's conditions line. The original renders all active
+					// conditions as a single comma-separated line WITHOUT (values), e.g.
+					// "Taunting, Starving" -- so the previous \(\d+\) pattern never matched.
+					// Match any <size=N> line containing at least one known condition name.
+					if (rawPhaseTexts.Count > 0) {
+						string phaseAlt = string.Join("|", rawPhaseTexts.Select(ph => Regex.Escape(ph)));
 						result = Regex.Replace(
 							result,
-							@"\n<size=\d+>" + Regex.Escape(ph) + @"\(\d+\)[^<]*</size>",
+							@"\n<size=\d+>[^<]*(?:" + phaseAlt + @")[^<]*</size>",
 							"",
 							RegexOptions.None
 						);
