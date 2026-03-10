@@ -106,6 +106,7 @@ namespace GanExtendDisplay
 				);
 				int condCount = 0;
 				string condText = "<size=14>";
+				var rawPhaseTexts = new System.Collections.Generic.List<string>();
 				foreach (BaseStats item in condSources) {
 					string text = item.GetPhaseStr();
 					if (text.IsEmpty()) { continue; }
@@ -113,6 +114,7 @@ namespace GanExtendDisplay
 						text = item.source.GetName();
 						if (text.IsEmpty()) { continue; }
 					}
+					rawPhaseTexts.Add(text);
 					Color c = Color.white;
 					switch (item.source.group) {
 						case "Bad":
@@ -134,15 +136,16 @@ namespace GanExtendDisplay
 				if (condCount > 0) {
 					condText = condText.TrimEnd().TrimEnd(',');
 					condText += "</size>";
-					// Strip the original's basic conditions lines to prevent double-display.
-					// The original renders each condition as: \n<size=N>text(value)</size>
-					// We match any such line that contains a parenthesised number.
-					result = Regex.Replace(
-						result,
-						@"\n<size=\d+>[^<]*\(\d+\)[^<]*</size>",
-						"",
-						RegexOptions.None
-					);
+					// Strip only the original's lines for conditions that are actually active.
+					// Using exact phase texts avoids matching unrelated lines (e.g. favgift).
+					foreach (string ph in rawPhaseTexts) {
+						result = Regex.Replace(
+							result,
+							@"\n<size=\d+>" + Regex.Escape(ph) + @"\(\d+\)[^<]*</size>",
+							"",
+							RegexOptions.None
+						);
+					}
 					result += Environment.NewLine + condText;
 				}
 			} catch (Exception condEx) {
