@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,6 +9,66 @@ using UnityEngine;
 
 namespace GanExtendDisplay
 {
+	// Shim that shadows ClassExtension.lang() within our namespace.
+	//
+	// The game periodically changes the number of optional parameters on lang(),
+	// which causes MissingMethodException in our compiled binary because C# bakes
+	// the exact overload signature into the IL at compile time.
+	//
+	// By defining our own lang() extension in the same namespace, the C# compiler
+	// always resolves to THIS method (local namespace wins over using-imported ones),
+	// so our IL never references ClassExtension.lang() directly.  The actual call is
+	// dispatched at runtime via a cached delegate that adapts to whatever overload
+	// the current game DLL exposes.
+	internal static class LangShim
+	{
+		private static readonly Func<string, string[], string> _fn = Build();
+
+		private static Func<string, string[], string> Build()
+		{
+			try
+			{
+				var candidates = typeof(ClassExtension)
+					.GetMethods(BindingFlags.Public | BindingFlags.Static)
+					.Where(m => m.Name == "lang" && m.ReturnType == typeof(string))
+					.ToList();
+
+				// Prefer params-style: lang(string key, params string[] args)
+				var paramsOverload = candidates.FirstOrDefault(m =>
+				{
+					var ps = m.GetParameters();
+					return ps.Length == 2
+						&& ps[0].ParameterType == typeof(string)
+						&& ps[1].IsDefined(typeof(ParamArrayAttribute), false);
+				});
+				if (paramsOverload != null)
+					return (key, args) =>
+						(string)paramsOverload.Invoke(null, new object[] { key, args ?? Array.Empty<string>() }) ?? key;
+
+				// Fall back to the overload with the most parameters (optional-param style)
+				var best = candidates.OrderByDescending(m => m.GetParameters().Length).FirstOrDefault();
+				if (best == null) return (key, _) => key;
+
+				int n = best.GetParameters().Length;
+				return (key, args) =>
+				{
+					var a = new object[n];
+					a[0] = key;
+					for (int i = 1; i < n; i++)
+						a[i] = (args != null && i - 1 < args.Length) ? args[i - 1] : "";
+					return (string)best.Invoke(null, a) ?? key;
+				};
+			}
+			catch
+			{
+				return (key, _) => key;
+			}
+		}
+
+		public static string lang(this string key, params string[] args) => _fn(key, args);
+	}
+
+
 	public static class CS
 	{
 		public static UnityEngine.Color Color_Crude = new UnityEngine.Color(0.44705883f, 0.21176471f, 0.21176471f);
