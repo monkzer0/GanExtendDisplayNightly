@@ -139,10 +139,10 @@ namespace GanExtendDisplay
 					// Replace the game's plain conditions line with our enhanced version.
 					// The game outputs: \r\n<size=14><color=#FFFFFF>Cond1</color>, ...</size>
 					// Replace the whole originalResult (which is just that one line) with our version.
-					result = Environment.NewLine + condText;
 					// The game omits favgift from GetHoverText2 when conditions are present
 					// (confirmed by log: originalResult contains only the conditions line).
-					// Re-add it here so it is not lost.
+					// Re-add it here so it is not lost. Favgift goes first to match original ordering.
+					result = "";
 					if (__instance.knowFav) {
 						try {
 							string favLine = "favgift".lang(__instance.GetFavCat().GetName().ToLower(), __instance.GetFavFood().GetName());
@@ -152,6 +152,7 @@ namespace GanExtendDisplay
 							}
 						} catch { }
 					}
+					result += Environment.NewLine + condText;
 				}
 			} catch (Exception condEx) {
 				Main.Logger.LogWarning($"[ExtendDisplay] conditions block threw: {condEx.Message}");
