@@ -145,7 +145,8 @@ namespace GanExtendDisplay
 						int idx = result.LastIndexOf(ph);
 						if (idx < 0) continue;
 						int nl = result.LastIndexOf('\n', idx);
-						if (nl >= 0 && nl < cutAt) cutAt = nl;
+						int cutPos = nl >= 0 ? nl : 0; // no preceding newline = conditions start at position 0
+						if (cutPos < cutAt) cutAt = cutPos;
 					}
 					if (cutAt < result.Length) result = result.Substring(0, cutAt);
 					result += Environment.NewLine + condText;
