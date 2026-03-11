@@ -152,9 +152,11 @@ namespace GanExtendDisplay
 				 CharaSettings.CharaDisplayLineFavgiftSettings != null &&
 				 CharaSettings.CharaDisplayLineFavgiftSettings.CharaDisplayLineOut &&
 				 (!CharaSettings.CharaDisplayLineFavgiftSettings.CharaDisplayPCFactionOnly || __instance.IsPCFaction));
+			Main.Logger.LogInfo($"[ExtendDisplay DEBUG] knowFav={__instance.knowFav} condBuilt={condBuilt} wantFav={wantFav}");
 			if (wantFav) {
 				try {
 					string favLine = "favgift".lang(__instance.GetFavCat().GetName().ToLower(), __instance.GetFavFood().GetName());
+					Main.Logger.LogInfo($"[ExtendDisplay DEBUG] favLine={favLine.Replace("\n","\\n")}  empty={favLine.IsEmpty()}");
 					if (!favLine.IsEmpty()) {
 						int sz = (CharaSettings.CharaDisplayLineFavgiftSettings != null) ? CharaSettings.CharaDisplayLineFavgiftSettings.Size : 14;
 						favSection = Environment.NewLine + "<size=" + sz + ">" + favLine + "</size>";
@@ -163,6 +165,7 @@ namespace GanExtendDisplay
 					Main.Logger.LogWarning($"[ExtendDisplay] favgift threw: {favEx.Message}");
 				}
 			}
+			Main.Logger.LogInfo($"[ExtendDisplay DEBUG] favSection empty={favSection.IsEmpty()}  condSection empty={condSection.IsEmpty()}");
 
 			// ── Step 3: compose — favgift first, then conditions (original order) ─────
 			if (condBuilt) {
