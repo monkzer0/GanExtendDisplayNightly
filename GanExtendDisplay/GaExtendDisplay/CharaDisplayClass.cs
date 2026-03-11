@@ -87,26 +87,26 @@ namespace GanExtendDisplay
 		// Appended after the original GetHoverText2 output — adds content the original does not
 		// produce or produces in a less informative form.
 		//
+		// Display order matches the original mod (prefix era): favgift → conditions → acts → feats.
+		//
 		// Conditions: the original writes basic conditions (name + numeric value). This method
 		// replaces that section with an enhanced version that adds colour-coding by group
 		// (Buff/Debuff/Disease), an area-debuff name fallback when GetPhaseStr() == "#", and
-		// resistCon display. Before appending our enhanced output, the original's basic conditions
-		// lines are stripped from originalResult via a regex so they are not shown twice.
+		// resistCon display.
 		//
 		// Acts / Feats: unique additions that the original never generates; appended as-is.
 		public static string Chara_GetHoverText2_Additions(Chara __instance, string originalResult) {
 			string result = originalResult;
 
-			// Enhanced conditions — colour-coded by group, area-debuff fallback, resistCon
-			// Wrapped in try-catch: if this section throws, the original's basic conditions
-			// remain in place and acts/feats still render below.
+			// ── Step 1: build enhanced conditions string ───────────────────────────────
+			bool condBuilt = false;
+			string condSection = "";
 			try {
 				IEnumerable<BaseStats> condSources = __instance.conditions.Concat(
 					(!__instance.IsPCFaction) ? new BaseStats[0] : new BaseStats[2] { __instance.hunger, __instance.stamina }
 				);
 				int condCount = 0;
 				string condText = "<size=14>";
-				var rawPhaseTexts = new System.Collections.Generic.List<string>();
 				foreach (BaseStats item in condSources) {
 					string text = item.GetPhaseStr();
 					if (text.IsEmpty()) { continue; }
@@ -114,7 +114,6 @@ namespace GanExtendDisplay
 						text = item.source.GetName();
 						if (text.IsEmpty()) { continue; }
 					}
-					rawPhaseTexts.Add(text);
 					Color c = Color.white;
 					switch (item.source.group) {
 						case "Bad":
@@ -134,44 +133,45 @@ namespace GanExtendDisplay
 					condCount++;
 				}
 				if (condCount > 0) {
-					condText = condText.TrimEnd().TrimEnd(',');
-					condText += "</size>";
-					// Replace the game's plain conditions line with our enhanced version.
-					// The game outputs: \r\n<size=14><color=#FFFFFF>Cond1</color>, ...</size>
-					// Replace the whole originalResult (which is just that one line) with our version.
-					// The game omits favgift from GetHoverText2 when conditions are present
-					// (confirmed by log: originalResult contains only the conditions line).
-					// Re-add it here so it is not lost. Conditions first, favgift below.
-					result = Environment.NewLine + condText;
-					if (__instance.knowFav) {
-						try {
-							string favLine = "favgift".lang(__instance.GetFavCat().GetName().ToLower(), __instance.GetFavFood().GetName());
-							if (!favLine.IsEmpty()) {
-								int sz = (CharaSettings.CharaDisplayLineFavgiftSettings != null) ? CharaSettings.CharaDisplayLineFavgiftSettings.Size : 14;
-								result += Environment.NewLine + "<size=" + sz + ">" + favLine + "</size>";
-							}
-						} catch { }
-					}
+					condText = condText.TrimEnd().TrimEnd(',') + "</size>";
+					condSection = Environment.NewLine + condText;
+					condBuilt = true;
 				}
 			} catch (Exception condEx) {
 				Main.Logger.LogWarning($"[ExtendDisplay] conditions block threw: {condEx.Message}");
-				// original's basic conditions remain; no enhanced section appended
+				// original's basic conditions remain in result; no enhanced section appended
 			}
 
-			// Favgift force-display: when the player hasn't discovered the favgift yet,
-			// add it ourselves if the setting is enabled.
-			if (!__instance.knowFav &&
-				CharaSettings.CharaDisplayLineFavgiftSettings != null &&
-				CharaSettings.CharaDisplayLineFavgiftSettings.CharaDisplayLineOut &&
-				(!CharaSettings.CharaDisplayLineFavgiftSettings.CharaDisplayPCFactionOnly || __instance.IsPCFaction)) {
+			// ── Step 2: build favgift string ───────────────────────────────────────────
+			// knowFav=true  + condBuilt: game dropped favgift when conditions are present → supply it
+			// knowFav=true  + !condBuilt: game already wrote favgift into originalResult → skip
+			// knowFav=false + force-display enabled: game never shows it → supply it always
+			string favSection = "";
+			bool wantFav = (condBuilt && __instance.knowFav) ||
+				(!__instance.knowFav &&
+				 CharaSettings.CharaDisplayLineFavgiftSettings != null &&
+				 CharaSettings.CharaDisplayLineFavgiftSettings.CharaDisplayLineOut &&
+				 (!CharaSettings.CharaDisplayLineFavgiftSettings.CharaDisplayPCFactionOnly || __instance.IsPCFaction));
+			if (wantFav) {
 				try {
 					string favLine = "favgift".lang(__instance.GetFavCat().GetName().ToLower(), __instance.GetFavFood().GetName());
 					if (!favLine.IsEmpty()) {
-						result += Environment.NewLine + $"<size={CharaSettings.CharaDisplayLineFavgiftSettings.Size}>" + favLine + "</size>";
+						int sz = (CharaSettings.CharaDisplayLineFavgiftSettings != null) ? CharaSettings.CharaDisplayLineFavgiftSettings.Size : 14;
+						favSection = Environment.NewLine + "<size=" + sz + ">" + favLine + "</size>";
 					}
 				} catch (Exception favEx) {
-					Main.Logger.LogWarning($"[ExtendDisplay] favgift force-display threw: {favEx.Message}");
+					Main.Logger.LogWarning($"[ExtendDisplay] favgift threw: {favEx.Message}");
 				}
+			}
+
+			// ── Step 3: compose — favgift first, then conditions (original order) ─────
+			if (condBuilt) {
+				// Replace the game's plain conditions line with: favgift → enhanced conditions
+				result = favSection + condSection;
+			} else {
+				// No conditions we built: keep game's output (may already have favgift),
+				// then append force-display favgift if any.
+				result = originalResult + favSection;
 			}
 
 			if (CharaSettings.CharaDisplayLineActSettings.CharaDisplayLineOut && (!CharaSettings.CharaDisplayLineActSettings.CharaDisplayPCFactionOnly || __instance.IsPCFaction)) {
