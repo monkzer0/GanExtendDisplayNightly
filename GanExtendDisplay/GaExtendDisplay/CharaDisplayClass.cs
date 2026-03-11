@@ -141,8 +141,8 @@ namespace GanExtendDisplay
 					// Replace the whole originalResult (which is just that one line) with our version.
 					// The game omits favgift from GetHoverText2 when conditions are present
 					// (confirmed by log: originalResult contains only the conditions line).
-					// Re-add it here so it is not lost. Favgift goes first to match original ordering.
-					result = "";
+					// Re-add it here so it is not lost. Conditions first, favgift below.
+					result = Environment.NewLine + condText;
 					if (__instance.knowFav) {
 						try {
 							string favLine = "favgift".lang(__instance.GetFavCat().GetName().ToLower(), __instance.GetFavFood().GetName());
@@ -152,7 +152,6 @@ namespace GanExtendDisplay
 							}
 						} catch { }
 					}
-					result += Environment.NewLine + condText;
 				}
 			} catch (Exception condEx) {
 				Main.Logger.LogWarning($"[ExtendDisplay] conditions block threw: {condEx.Message}");
