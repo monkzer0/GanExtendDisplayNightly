@@ -14,7 +14,7 @@ using static GanExtendDisplay.CharaSettings;
 
 namespace GanExtendDisplay
 {
-	[BepInPlugin("ExtendDisplay", "ExtendDisplay", "1.0.0")]
+	[BepInPlugin("ExtendDisplay", "ExtendDisplay", "1.0.1")]
 	public class Main : BaseUnityPlugin
 	{
 		internal static new ManualLogSource Logger;
